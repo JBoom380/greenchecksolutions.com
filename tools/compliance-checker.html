@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compliance Deadline Calculator | Green Check Solutions</title>
+  <meta name="description" content="Interactive compliance deadline calculator for building performance standards. Find applicable laws, deadlines, and penalties for your building." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS RESET & VARIABLES ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:       #1B4332;
+      --primary-light: #2D6A4F;
+      --accent:        #D4A017;
+      --teal:          #40916C;
+      --tint:          #D8F3DC;
+      --navy:          #1E293B;
+      --bg:            #F7FDF9;
+      --border:        #E2E8F0;
+      --text-light:    #64748B;
+      --white:         #FFFFFF;
+      --red:           #DC2626;
+      --red-light:     #FEF2F2;
+      --yellow:        #D97706;
+      --yellow-light:  #FFFBEB;
+      --green-light:   #F0FDF4;
+      --shadow-sm:     0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+      --shadow-md:     0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:     0 10px 40px rgba(0,0,0,.14);
+      --radius:        10px;
+      --radius-sm:     6px;
+      --transition:    .2s ease;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--navy);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ===== URGENT BANNER ===== */
+    .urgent-banner {
+      background: linear-gradient(135deg, #7F1D1D 0%, var(--red) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: .65rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .875rem;
+      font-weight: 500;
+      letter-spacing: .01em;
+    }
+    .urgent-banner span { opacity: .9; }
+    .urgent-banner strong { font-weight: 700; }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      padding: 1.5rem 2rem;
+      box-shadow: var(--shadow-md);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--white);
+      letter-spacing: -.01em;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .logo-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      background: var(--accent);
+      border-radius: 50%;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: .875rem;
+      color: rgba(255,255,255,.75);
+      font-style: italic;
+      font-weight: 300;
+    }
+    .header-contact {
+      font-family: 'Inter', sans-serif;
+      font-size: .8rem;
+      color: rgba(255,255,255,.7);
+      text-align: right;
+    }
+    .header-contact a { color: var(--accent); text-decoration: none; }
+    .header-contact a:hover { text-decoration: underline; }
+
+    /* ===== MAIN WRAPPER ===== */
+    .page-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    /* ===== PROGRESS INDICATOR ===== */
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 2.25rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: .35rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .progress-step {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .55rem .75rem;
+      border-radius: 50px;
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--text-light);
+      transition: all var(--transition);
+      cursor: default;
+    }
+    .progress-step .step-num {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      font-weight: 700;
+      background: var(--border);
+      color: var(--text-light);
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .progress-step.active {
+      background: var(--primary);
+      color: var(--white);
+    }
+    .progress-step.active .step-num {
+      background: var(--accent);
+      color: var(--white);
+    }
+    .progress-step.done {
+      color: var(--teal);
+    }
+    .progress-step.done .step-num {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    /* ===== SECTION CARDS ===== */
+    .section-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.375rem;
+      color: var(--primary);
+      margin-bottom: .35rem;
+    }
+    .section-subtitle {
+      font-size: .9rem;
+      color: var(--text-light);
+      margin-bottom: 1.75rem;
+    }
+
+    /* ===== FORM LAYOUT ===== */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    label {
+      font-size: .825rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+    input, select, textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: .95rem;
+      color: var(--navy);
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: .65rem .875rem;
+      width: 100%;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right .875rem center;
+      padding-right: 2.25rem;
+      cursor: pointer;
+    }
+    input:focus, select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(64,145,108,.15);
+      background: var(--white);
+    }
+    input::placeholder { color: #CBD5E1; }
+    .field-hint {
+      font-size: .775rem;
+      color: var(--text-light);
+      margin-top: .1rem;
+    }
+    .form-actions { margin-top: 1.75rem; }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .8rem 1.75rem;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+      letter-spacing: .01em;
+      line-height: 1;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(27,67,50,.30);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(27,67,50,.35);
+    }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-accent {
+      background: linear-gradient(135deg, var(--accent) 0%, #E6B420 100%);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(212,160,23,.30);
+    }
+    .btn-accent:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(212,160,23,.40);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--tint);
+    }
+    .btn-lg {
+      padding: 1rem 2.25rem;
+      font-size: 1.05rem;
+    }
+    .btn-full { width: 100%; }
+
+    /* ===== EMAIL GATE OVERLAY ===== */
+    #email-gate {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(15,30,20,.65);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    #email-gate.active { display: flex; }
+    .gate-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      padding: 2.5rem 2rem;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      animation: slideUp .3s ease;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .gate-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      background: var(--tint);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+      font-size: 1.5rem;
+    }
+    .gate-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: .5rem;
+    }
+    .gate-subtitle {
+      font-size: .875rem;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .gate-fine-print {
+      font-size: .75rem;
+      color: var(--text-light);
+      text-align: center;
+      margin-top: .75rem;
+    }
+    .gate-preview {
+      background: var(--tint);
+      border-radius: var(--radius-sm);
+      padding: .75rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: .82rem;
+      color: var(--primary-light);
+    }
+    .gate-preview strong { color: var(--primary); }
+
+    /* ===== RESULTS ===== */
+    #results-section { display: none; }
+    #results-section.active { display: block; }
+
+    .results-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+    .results-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+    .results-meta {
+      font-size: .85rem;
+      color: var(--text-light);
+      margin-top: .25rem;
+    }
+    .results-count-badge {
+      background: var(--primary);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: .8rem;
+      padding: .35rem .9rem;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    /* Law Card */
+    .law-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition);
+    }
+    .law-card:hover { box-shadow: var(--shadow-md); }
+    .law-card-header {
+      padding: 1.125rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+    .law-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary);
+      margin-bottom: .15rem;
+    }
+    .bill-badge {
+      display: inline-block;
+      background: var(--tint);
+      color: var(--primary-light);
+      font-size: .72rem;
+      font-weight: 600;
+      padding: .2rem .55rem;
+      border-radius: 4px;
+      letter-spacing: .03em;
+    }
+    .law-card-body { padding: 1.25rem 1.5rem; }
+    .law-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 1rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: .3rem .7rem;
+      border-radius: 50px;
+    }
+    .badge-green { background: #DCFCE7; color: #166534; }
+    .badge-red   { background: var(--red-light); color: var(--red); }
+    .badge-yellow{ background: var(--yellow-light); color: var(--yellow); }
+    .badge-urgent{
+      background: var(--red);
+      color: var(--white);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(220,38,38,.4); }
+      50%      { box-shadow: 0 0 0 5px rgba(220,38,38,.0); }
+    }
+
+    .penalty-box {
+      background: #FFF8F0;
+      border: 1px solid #FBBF7A;
+      border-radius: var(--radius-sm);
+      padding: .875rem 1rem;
+      margin-bottom: 1rem;
+    }
+    .penalty-label {
+      font-size: .75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--yellow);
+      margin-bottom: .2rem;
+    }
+    .penalty-value {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--navy);
+    }
+
+    .req-list {
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+    .req-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      font-size: .875rem;
+      color: var(--navy);
+      padding: .3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .req-list li:last-child { border-bottom: none; }
+    .req-list li::before {
+      content: '✓';
+      color: var(--teal);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      background: var(--tint);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: .875rem;
+      padding: .5rem 1rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      border: 1px solid rgba(27,67,50,.15);
+      transition: all var(--transition);
+      margin-bottom: .875rem;
+    }
+    .service-link:hover {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+    .law-notes {
+      font-size: .8rem;
+      color: var(--text-light);
+      line-height: 1.55;
+      border-top: 1px solid var(--border);
+      padding-top: .75rem;
+      margin-top: .5rem;
+    }
+    .law-notes strong { color: var(--navy); }
+
+    /* No match panel */
+    .no-match-card {
+      background: var(--green-light);
+      border: 1px solid #86EFAC;
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+    }
+    .no-match-icon { font-size: 2.5rem; margin-bottom: .75rem; }
+    .no-match-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: #166534;
+      margin-bottom: .5rem;
+    }
+    .no-match-text { font-size: .9rem; color: #15803D; }
+
+    /* ===== LEAD CAPTURE / CTA SECTION ===== */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--white);
+      margin-top: 1.75rem;
+    }
+    .cta-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.375rem;
+      margin-bottom: .5rem;
+    }
+    .cta-subtitle {
+      font-size: .9rem;
+      opacity: .8;
+      margin-bottom: 1.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,.65);
+      padding: 1.75rem 2rem;
+      text-align: center;
+      font-size: .8rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    #contact { scroll-margin-top: 4rem; }
+
+    /* ===== FORM VALIDATION ===== */
+    input.invalid, select.invalid {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(220,38,38,.15);
+    }
+    .error-msg {
+      font-size: .77rem;
+      color: var(--red);
+      font-weight: 500;
+      margin-top: .15rem;
+      display: none;
+    }
+    .error-msg.show { display: block; }
+
+    /* ===== HIDDEN ===== */
+    .hidden { display: none !important; }
+
+    /* ===== PRINT ===== */
+    @media print {
+      .urgent-banner, header .header-contact, .progress-bar,
+      #form-section, #email-gate, .cta-section, .form-actions,
+      .btn-outline, footer { display: none !important; }
+      body { background: white; }
+      .law-card { box-shadow: none; border: 1px solid #ccc; }
+      .badge-urgent { animation: none; background: #DC2626; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      header { padding: 1.25rem; }
+      .header-inner { flex-direction: column; align-items: flex-start; gap: .4rem; }
+      .header-contact { text-align: left; }
+      .page-wrapper { padding: 1.25rem .875rem 3rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+      .section-card { padding: 1.375rem; }
+      .law-card-header, .law-card-body { padding: 1rem; }
+      .progress-step .step-label { display: none; }
+      .progress-step { flex: none; width: 2.25rem; }
+      .progress-bar { justify-content: center; gap: .5rem; }
+      .results-header { flex-direction: column; }
+      .gate-card { padding: 1.75rem 1.25rem; }
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1.5rem 0;
+    }
+
+    /* ===== SECTION LABEL ===== */
+    .req-section-label {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--text-light);
+      margin-bottom: .5rem;
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid rgba(255,255,255,.4);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <!-- URGENT BANNER -->
+  <div class="urgent-banner">
+    <strong>&#9888; WA HB 1257 Tier 1 Deadline: June 2026</strong>
+    <span> — Buildings &gt;220,000 SF must act now. &gt;90,000 SF deadline June 2027. Is your building ready?</span>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div>
+        <div class="logo">
+          <span class="logo-check">&#10003;</span>
+          Green Check Solutions
+        </div>
+        <div class="tagline">True costs. Clear answers. Smarter buildings.</div>
+      </div>
+      <div class="header-contact">
+        <div><a href="mailto:info@greenchecksolutions.com">info@greenchecksolutions.com</a></div>
+        <div><a href="https://www.greenchecksolutions.com" target="_blank" rel="noopener">www.greenchecksolutions.com</a></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE WRAPPER -->
+  <div class="page-wrapper">
+
+    <!-- PROGRESS INDICATOR -->
+    <div class="progress-bar" id="progress-bar" role="navigation" aria-label="Step progress">
+      <div class="progress-step active" id="step-indicator-1">
+        <div class="step-num">1</div>
+        <span class="step-label">Building Profile</span>
+      </div>
+      <div class="progress-step" id="step-indicator-2">
+        <div class="step-num">2</div>
+        <span class="step-label">Verify Email</span>
+      </div>
+      <div class="progress-step" id="step-indicator-3">
+        <div class="step-num">3</div>
+        <span class="step-label">Your Results</span>
+      </div>
+    </div>
+
+    <!-- STEP 1: BUILDING PROFILE FORM -->
+    <div id="form-section">
+      <div class="section-card">
+        <h1 class="section-title">Compliance Deadline Calculator</h1>
+        <p class="section-subtitle">
+          Enter your building details below to instantly see all applicable building performance standards,
+          filing deadlines, and estimated penalties.
+        </p>
+
+        <form id="building-form" novalidate>
+          <div class="form-grid">
+
+            <!-- State -->
+            <div class="form-group">
+              <label for="state-select">State</label>
+              <select id="state-select" required aria-required="true">
+                <option value="">— Select State —</option>
+                <optgroup label="Regulated States">
+                  <option value="WA">Washington (WA)</option>
+                  <option value="NY">New York (NY)</option>
+                  <option value="CA">California (CA)</option>
+                  <option value="MA">Massachusetts (MA)</option>
+                  <option value="CO">Colorado (CO)</option>
+                  <option value="DC">District of Columbia (DC)</option>
+                  <option value="OR">Oregon (OR)</option>
+                  <option value="MD">Maryland (MD)</option>
+                </optgroup>
+                <optgroup label="All Other States">
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </optgroup>
+              </select>
+              <span class="error-msg" id="state-error">Please select a state.</span>
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+              <label for="city-input">City</label>
+              <!-- Dropdown for regulated states -->
+              <select id="city-select" class="hidden" aria-label="City">
+                <option value="">— Select City —</option>
+              </select>
+              <!-- Text input for unregulated states -->
+              <input
+                type="text"
+                id="city-input"
+                placeholder="Enter city name"
+                aria-label="City"
+                autocomplete="address-level2"
+              />
+              <span class="error-msg" id="city-error">Please enter or select a city.</span>
+            </div>
+
+            <!-- Building SF -->
+            <div class="form-group">
+              <label for="sf-input">Building Square Footage</label>
+              <input
+                type="number"
+                id="sf-input"
+                placeholder="e.g. 75000"
+                min="1"
+                max="10000000"
+                required
+                aria-required="true"
+              />
+              <span class="field-hint">Gross floor area (total SF)</span>
+              <span class="error-msg" id="sf-error">Please enter a valid square footage.</span>
+            </div>
+
+            <!-- Year Built -->
+            <div class="form-group">
+              <label for="year-input">Year Built</label>
+              <input
+                type="number"
+                id="year-input"
+                placeholder="e.g. 1998"
+                min="1800"
+                max="2026"
+                required
+                aria-required="true"
+              />
+              <span class="error-msg" id="year-error">Please enter a valid 4-digit year.</span>
+            </div>
+
+            <!-- Building Type -->
+            <div class="form-group full">
+              <label for="type-select">Building Type</label>
+              <select id="type-select" required aria-required="true">
+                <option value="">— Select Building Type —</option>
+                <option value="Office">Office</option>
+                <option value="Retail">Retail</option>
+                <option value="Warehouse">Warehouse</option>
+                <option value="Multifamily">Multifamily / Residential</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Education">Education / K-12 / University</option>
+                <option value="Hotel">Hotel / Hospitality</option>
+                <option value="Industrial">Industrial / Manufacturing</option>
+                <option value="Other">Other / Mixed-Use</option>
+              </select>
+              <span class="error-msg" id="type-error">Please select a building type.</span>
+            </div>
+
+          </div><!-- /form-grid -->
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg" id="check-btn">
+              Check My Compliance Requirements &#8594;
+            </button>
+          </div>
+        </form>
+      </div><!-- /section-card -->
+
+      <!-- Info blurb -->
+      <div style="text-align:center; padding: .5rem 1rem; color: var(--text-light); font-size: .82rem;">
+        Covers WA, NY, CA, MA, CO, DC, OR, MD building performance standards &amp; federal EISA 432.
+        Data current as of early 2026. Always verify with a licensed professional.
+      </div>
+    </div><!-- /#form-section -->
+
+    <!-- STEP 2: EMAIL GATE (Modal Overlay) -->
+    <div id="email-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+      <div class="gate-card">
+        <div class="gate-icon">&#128233;</div>
+        <h2 class="gate-title" id="gate-title">Enter your email to receive your full compliance report</h2>
+        <p class="gate-subtitle">
+          We'll send you a summary of your compliance requirements, deadlines, and recommended next steps — no spam, ever.
+        </p>
+        <div class="gate-preview" id="gate-preview">
+          <!-- Filled dynamically -->
+        </div>
+        <div class="form-group" style="margin-bottom:.75rem;">
+          <label for="email-input">Work Email Address</label>
+          <input
+            type="email"
+            id="email-input"
+            placeholder="you@company.com"
+            autocomplete="email"
+            required
+          />
+          <span class="error-msg" id="email-error">Please enter a valid email address.</span>
+        </div>
+        <button class="btn btn-primary btn-full" id="get-report-btn" style="margin-top:.25rem;">
+          Get My Report &#8594;
+        </button>
+        <p class="gate-fine-print">No spam. One-time notification only. Unsubscribe anytime.</p>
+        <button
+          style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.25rem;color:var(--text-light);"
+          onclick="closeGate()"
+          aria-label="Close"
+        >&times;</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: RESULTS SECTION -->
+    <div id="results-section">
+      <div class="results-header">
+        <div>
+          <h2 class="results-title" id="results-title">Compliance Analysis Results</h2>
+          <p class="results-meta" id="results-meta"></p>
+        </div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;">
+          <span class="results-count-badge" id="results-count-badge"></span>
+          <button class="btn btn-outline" onclick="recalculate()" style="font-size:.85rem;padding:.5rem 1rem;">
+            &#8592; Recalculate
+          </button>
+          <button class="btn btn-outline" onclick="window.print()" style="font-size:.85rem;padding:.5rem 1rem;">
+            &#128438; Print
+          </button>
+        </div>
+      </div>
+
+      <!-- Laws list -->
+      <div id="laws-container"></div>
+
+      <!-- Lead Capture / CTA -->
+      <div class="section-card" style="margin-top:1.5rem;" id="lead-section">
+        <h3 style="font-family:'Montserrat',sans-serif;font-weight:700;color:var(--primary);margin-bottom:.35rem;">
+          Download Your Compliance Report
+        </h3>
+        <p style="font-size:.875rem;color:var(--text-light);margin-bottom:1.25rem;">
+          Get a CSV summary of all applicable laws and deadlines for your records — and let our team help you take the next step.
+        </p>
+        <div style="display:flex;gap:.875rem;flex-wrap:wrap;align-items:center;">
+          <button class="btn btn-primary" onclick="downloadCSV()" id="download-btn">
+            &#11015; Download CSV Report
+          </button>
+        </div>
+
+        <!-- Hidden Formspree form -->
+        <form
+          id="formspree-form"
+          action="https://formspree.io/f/REPLACE_WITH_ID"
+          method="POST"
+          style="display:none;"
+        >
+          <input type="hidden" name="email" id="fs-email" />
+          <input type="hidden" name="state" id="fs-state" />
+          <input type="hidden" name="city" id="fs-city" />
+          <input type="hidden" name="sf" id="fs-sf" />
+          <input type="hidden" name="buildingType" id="fs-type" />
+          <input type="hidden" name="yearBuilt" id="fs-year" />
+          <input type="hidden" name="applicableLaws" id="fs-laws" />
+          <input type="hidden" name="timestamp" id="fs-timestamp" />
+        </form>
+      </div>
+
+      <!-- Big CTA -->
+      <div class="cta-section" id="contact">
+        <div class="cta-title">Ready to get compliant? Let's talk.</div>
+        <p class="cta-subtitle">
+          Our team of licensed energy engineers and compliance specialists can handle everything —
+          from benchmarking to filings to full performance plans.
+        </p>
+        <div class="cta-buttons">
+          <a href="mailto:info@greenchecksolutions.com?subject=Compliance%20Consultation%20Request" class="btn btn-accent btn-lg">
+            Schedule a Free Compliance Call &#8594;
+          </a>
+          <a href="https://www.greenchecksolutions.com" target="_blank" rel="noopener" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,.5);color:white;">
+            Learn More
+          </a>
+        </div>
+        <p style="margin-top:1.25rem;font-size:.8rem;opacity:.65;">
+          info@greenchecksolutions.com &nbsp;|&nbsp; www.greenchecksolutions.com
+        </p>
+      </div>
+
+    </div><!-- /#results-section -->
+  </div><!-- /.page-wrapper -->
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      &copy; 2026 Green Check Solutions. All rights reserved. &nbsp;|&nbsp;
+      <a href="mailto:info@greenchecksolutions.com">info@greenchecksolutions.com</a> &nbsp;|&nbsp;
+      <a href="https://www.greenchecksolutions.com" target="_blank" rel="noopener">www.greenchecksolutions.com</a>
+    </p>
+    <p style="margin-top:.35rem;">
+      Compliance data is provided for informational purposes only and does not constitute legal or professional advice.
+      Always verify requirements with qualified professionals and the relevant regulatory authority.
+    </p>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+  'use strict';
+
+  /* =============================================
+     DATA: CITIES BY STATE
+  ============================================= */
+  const CITIES_BY_STATE = {
+    WA: ['Seattle', 'Spokane', 'Tacoma', 'Bellevue', 'Kirkland', 'Redmond', 'Olympia', 'Vancouver', 'Pullman', 'Other WA City'],
+    NY: ['New York City', 'Buffalo', 'Rochester', 'Albany', 'Syracuse', 'Other NY City'],
+    CA: ['Los Angeles', 'San Francisco', 'San Diego', 'San Jose', 'Sacramento', 'Oakland', 'Other CA City'],
+    MA: ['Boston', 'Worcester', 'Springfield', 'Cambridge', 'Lowell', 'Other MA City'],
+    CO: ['Denver', 'Colorado Springs', 'Aurora', 'Boulder', 'Aspen', 'Fort Collins', 'Other CO City'],
+    DC: ['Washington DC'],
+    OR: ['Portland', 'Salem', 'Eugene', 'Bend', 'Other OR City'],
+    MD: ['Baltimore', 'Annapolis', 'Rockville', 'Bethesda', 'Other MD City'],
+  };
+
+  const REGULATED_STATES = Object.keys(CITIES_BY_STATE);
+
+  /* =============================================
+     DATA: COMPLIANCE LAWS
+  ============================================= */
+  const COMPLIANCE_LAWS = [
+    {
+      id: 'wa_cbps_tier1',
+      name: 'WA Clean Buildings Performance Standard — Tier 1',
+      billNumber: 'HB 1257',
+      state: 'WA',
+      cities: null,
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: ['Office','Retail','Warehouse','Healthcare','Education','Hotel','Industrial','Other'],
+      deadlineText: 'June 2026 – June 2028 (phased by building size)',
+      deadlineUrgent: true,
+      penaltyFormula: (sf) => `$5,000 + $${(sf * 1.50).toLocaleString()} = $${(5000 + sf * 1.50).toLocaleString()}/year`,
+      penaltyBase: 5000,
+      penaltyPerSF: 1.50,
+      requirements: [
+        'ENERGY STAR Portfolio Manager benchmarking',
+        'Meet EUI target for building type',
+        'Energy Management Plan (EMP)',
+        'Operations & Maintenance (O&M) Plan',
+        'WA Commerce portal filing'
+      ],
+      service: 'Full CBPS Compliance Package',
+      serviceLink: '#contact',
+      notes: 'Largest buildings (>220,000 SF) deadline June 2026; 90,000–220,000 SF deadline June 2027; 50,000–90,000 SF deadline June 2028.'
+    },
+    {
+      id: 'wa_cbps_tier2',
+      name: 'WA Clean Buildings Performance Standard — Tier 2',
+      billNumber: 'HB 1257',
+      state: 'WA',
+      cities: null,
+      sfThreshold: 20000,
+      sfThresholdMax: 50000,
+      sfCondition: 'range',
+      buildingTypes: ['Office','Retail','Warehouse','Healthcare','Education','Hotel','Industrial','Multifamily','Other'],
+      deadlineText: 'July 2027',
+      deadlineUrgent: true,
+      penaltyFormula: (sf) => `$${(sf * 0.30).toLocaleString()}/year ($0.30/SF)`,
+      penaltyBase: 0,
+      penaltyPerSF: 0.30,
+      requirements: [
+        'ENERGY STAR Portfolio Manager benchmarking',
+        'Meet Tier 2 EUI targets',
+        'Energy Management Plan'
+      ],
+      service: 'Full CBPS Compliance Package',
+      serviceLink: '#contact',
+      notes: 'Applies to buildings 20,000–50,000 SF and multifamily buildings >20,000 SF in WA state.'
+    },
+    {
+      id: 'wa_hb1390',
+      name: 'WA District Energy Decarbonization',
+      billNumber: 'HB 1390',
+      state: 'WA',
+      cities: null,
+      sfThreshold: 0,
+      sfCondition: 'campus',
+      buildingTypes: null,
+      deadlineText: 'Ongoing — 15-year decarbonization plan required',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Custom — varies by system',
+      requirements: [
+        '15-year district energy decarbonization plan',
+        'Alternative compliance pathway analysis',
+        'System-level efficiency documentation'
+      ],
+      service: 'Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'Applies to campus-style district energy systems. Connected buildings must still meet CBPS individually.'
+    },
+    {
+      id: 'seattle_beps',
+      name: 'Seattle Building Emissions Performance Standard',
+      billNumber: 'Seattle BEPS',
+      state: 'WA',
+      cities: ['Seattle'],
+      sfThreshold: 20000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: '2027–2030 (phased compliance)',
+      deadlineUrgent: true,
+      penaltyFormula: (sf) => 'TBD per compliance cycle',
+      requirements: [
+        'Annual energy benchmarking',
+        'GHG emissions reporting',
+        'Third-party data verification',
+        'Building tune-up requirement'
+      ],
+      service: 'Full CBPS Compliance Package + GHG Inventory',
+      serviceLink: '#contact',
+      notes: 'Separate from WA State CBPS. Seattle buildings must comply with both.'
+    },
+    {
+      id: 'nyc_ll97',
+      name: 'NYC Local Law 97 — Carbon Emissions Cap',
+      billNumber: 'Local Law 97',
+      state: 'NY',
+      cities: ['New York City','Manhattan','Brooklyn','Queens','Bronx','Staten Island'],
+      sfThreshold: 25000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: '2024 ongoing — stricter limits 2030',
+      deadlineUrgent: true,
+      penaltyFormula: (sf) => '$268 per metric ton of CO₂ over cap/year',
+      requirements: [
+        'Annual GHG emissions report',
+        'Meet carbon intensity limits by building category',
+        'Emissions intensity benchmarking'
+      ],
+      service: 'GHG Inventory + Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'Penalties of $268/metric ton over the cap. Stricter limits begin 2030. Most buildings >25,000 SF are covered.'
+    },
+    {
+      id: 'nyc_ll84',
+      name: 'NYC Local Law 84/133 — Annual Benchmarking',
+      billNumber: 'Local Law 84/133',
+      state: 'NY',
+      cities: ['New York City','Manhattan','Brooklyn','Queens','Bronx','Staten Island'],
+      sfThreshold: 25000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — May 1 each year',
+      deadlineUrgent: true,
+      penaltyFormula: () => 'Fines per day of non-compliance',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to NYC benchmarking portal by May 1'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Annual disclosure requirement. Failure to benchmark results in fines per day.'
+    },
+    {
+      id: 'boston_berdo',
+      name: 'Boston BERDO 2.0 — Building Emissions Reduction',
+      billNumber: 'BERDO 2.0',
+      state: 'MA',
+      cities: ['Boston'],
+      sfThreshold: 35000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — net-zero by 2050',
+      deadlineUrgent: true,
+      penaltyFormula: () => '$234 per metric ton over cap (Alternative Compliance Payment)',
+      requirements: [
+        'Annual GHG emissions reporting',
+        'Meet emissions intensity targets',
+        'Net-zero by 2050 pathway'
+      ],
+      service: 'GHG Inventory + Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'ACP of $234/metric ton. Escalating targets through 2050. Public disclosure of compliance status.'
+    },
+    {
+      id: 'ma_lber',
+      name: 'Massachusetts Large Building Energy Reporting',
+      billNumber: 'MA LBER',
+      state: 'MA',
+      cities: null,
+      sfThreshold: 20000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual reporting to MA DOER',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'State penalties apply',
+      requirements: [
+        'Annual energy use reporting to MA DOER',
+        'ENERGY STAR Portfolio Manager data'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Statewide MA requirement separate from Boston BERDO.'
+    },
+    {
+      id: 'co_hb211286',
+      name: 'Colorado Building Performance Standards',
+      billNumber: 'HB 21-1286',
+      state: 'CO',
+      cities: null,
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: '7% reduction by 2026; 20% reduction by 2030',
+      deadlineUrgent: true,
+      penaltyFormula: () => 'TBD — rulemaking in progress',
+      requirements: [
+        'Annual energy benchmarking',
+        'Meet energy reduction targets',
+        'Compliance pathway documentation'
+      ],
+      service: 'Compliance Assessment + Energy Benchmark Report',
+      serviceLink: '#contact',
+      notes: 'First compliance period ends 2026. Mandatory benchmarking already in effect.'
+    },
+    {
+      id: 'denver_energize',
+      name: 'Denver Energize Denver',
+      billNumber: 'Energize Denver',
+      state: 'CO',
+      cities: ['Denver'],
+      sfThreshold: 25000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Phased — benchmarking immediate; performance standards 2024+',
+      deadlineUrgent: true,
+      penaltyFormula: () => 'Escalating penalties for non-compliance',
+      requirements: [
+        'Annual benchmarking',
+        'Meet energy performance standards',
+        'Electrification readiness assessment'
+      ],
+      service: 'Compliance Assessment + Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Denver-specific ordinance requiring benchmarking and performance standards.'
+    },
+    {
+      id: 'dc_beps',
+      name: 'DC Building Energy Performance Standards',
+      billNumber: 'DC BEPS',
+      state: 'DC',
+      cities: null,
+      sfThreshold: 10000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Compliance periods — expanding coverage',
+      deadlineUrgent: true,
+      penaltyFormula: (sf) => `$${Math.min(sf * 10, 7500000).toLocaleString()} (max $7.5M) ($10/SF)`,
+      requirements: [
+        'ENERGY STAR benchmarking',
+        'Meet energy performance targets',
+        'Compliance period filings'
+      ],
+      service: 'Compliance Assessment + Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Penalty of $10/SF, capped at $7.5 million. Coverage expanding to buildings >10,000 SF.'
+    },
+    {
+      id: 'ca_ab802',
+      name: 'California AB 802 — Annual Benchmarking',
+      billNumber: 'AB 802',
+      state: 'CA',
+      cities: null,
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: ['Office','Retail','Healthcare','Hotel','Industrial','Other'],
+      deadlineText: 'Annual — June 1 each year',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'State penalties apply',
+      requirements: [
+        'Annual ENERGY STAR benchmarking',
+        'Submit to CA energy portal',
+        'Utility data sharing authorization'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Paired with SB 253 (corporate GHG reporting) and SB 261 (climate risk disclosure).'
+    },
+    {
+      id: 'or_hb3409',
+      name: 'Oregon Building Performance Standard',
+      billNumber: 'HB 3409',
+      state: 'OR',
+      cities: null,
+      sfThreshold: 35000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Compliance targets starting 2028',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'TBD — rulemaking in progress',
+      requirements: [
+        'ENERGY STAR benchmarking',
+        'Meet energy performance targets',
+        'Compliance pathway documentation'
+      ],
+      service: 'Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'In addition to existing ASHRAE Standard 100-based requirements effective January 2025.'
+    },
+    {
+      id: 'md_csna',
+      name: 'Maryland Climate Solutions Now Act',
+      billNumber: 'MD CSNA',
+      state: 'MD',
+      cities: null,
+      sfThreshold: 35000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: '20% emissions reduction by 2030; net-zero by 2040',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'TBD — rulemaking in progress',
+      requirements: [
+        'GHG emissions baseline',
+        'Reduction pathway documentation',
+        'Annual progress reporting'
+      ],
+      service: 'GHG Inventory + Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'Maryland statewide mandate with escalating requirements through 2040.'
+    },
+    {
+      id: 'eisa_432',
+      name: 'EISA Section 432 — Federal Buildings',
+      billNumber: 'EISA 432',
+      state: null,
+      cities: null,
+      sfThreshold: 0,
+      sfCondition: 'federal',
+      buildingTypes: null,
+      deadlineText: 'Ongoing — 4-year evaluation cycle',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Federal compliance requirements',
+      requirements: [
+        'CEM-designated energy manager',
+        '4-year covered facility evaluations',
+        'Annual energy reporting'
+      ],
+      service: 'Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'Applies to federal agencies with >$1M annual energy costs.'
+    }
+  ];
+
+  /* =============================================
+     MATCHING LOGIC
+  ============================================= */
+  function getApplicableLaws(state, city, sf, buildingType, yearBuilt, isFederal) {
+    return COMPLIANCE_LAWS.filter(law => {
+      if (law.sfCondition === 'federal') return isFederal;
+      if (law.sfCondition === 'campus') return false;
+      if (law.state && law.state !== state) return false;
+      if (law.cities && !law.cities.some(c => city.toLowerCase().includes(c.toLowerCase()))) return false;
+      if (law.sfCondition === 'gte' && sf < law.sfThreshold) return false;
+      if (law.sfCondition === 'range') {
+        const isMultifamily = buildingType === 'Multifamily';
+        if (!isMultifamily && (sf < law.sfThreshold || sf >= law.sfThresholdMax)) return false;
+        if (isMultifamily && sf < law.sfThreshold) return false;
+      }
+      if (law.buildingTypes && !law.buildingTypes.includes(buildingType)) return false;
+      return true;
+    });
+  }
+
+  /* =============================================
+     STATE MANAGEMENT
+  ============================================= */
+  let currentData = {};
+  let applicableLaws = [];
+
+  /* =============================================
+     DOM REFERENCES
+  ============================================= */
+  const stateSelect    = document.getElementById('state-select');
+  const citySelect     = document.getElementById('city-select');
+  const cityInput      = document.getElementById('city-input');
+  const sfInput        = document.getElementById('sf-input');
+  const yearInput      = document.getElementById('year-input');
+  const typeSelect     = document.getElementById('type-select');
+  const buildingForm   = document.getElementById('building-form');
+  const emailGate      = document.getElementById('email-gate');
+  const emailInput     = document.getElementById('email-input');
+  const getReportBtn   = document.getElementById('get-report-btn');
+  const formSection    = document.getElementById('form-section');
+  const resultsSection = document.getElementById('results-section');
+  const lawsContainer  = document.getElementById('laws-container');
+
+  /* =============================================
+     CITY DROPDOWN LOGIC
+  ============================================= */
+  stateSelect.addEventListener('change', () => {
+    const state = stateSelect.value;
+    if (CITIES_BY_STATE[state]) {
+      // Regulated state — show dropdown
+      cityInput.classList.add('hidden');
+      citySelect.classList.remove('hidden');
+      citySelect.innerHTML = '<option value="">— Select City —</option>' +
+        CITIES_BY_STATE[state].map(c => `<option value="${c}">${c}</option>`).join('');
+      citySelect.setAttribute('aria-required', 'true');
+      cityInput.removeAttribute('aria-required');
+    } else {
+      // Generic state — show text input
+      citySelect.classList.add('hidden');
+      cityInput.classList.remove('hidden');
+      cityInput.value = '';
+      citySelect.innerHTML = '<option value="">— Select City —</option>';
+      cityInput.setAttribute('aria-required', 'true');
+      citySelect.removeAttribute('aria-required');
+    }
+  });
+
+  function getCityValue() {
+    const state = stateSelect.value;
+    if (CITIES_BY_STATE[state]) return citySelect.value;
+    return cityInput.value.trim();
+  }
+
+  /* =============================================
+     FORM VALIDATION
+  ============================================= */
+  function showError(inputEl, msgId) {
+    inputEl.classList.add('invalid');
+    document.getElementById(msgId).classList.add('show');
+  }
+  function clearError(inputEl, msgId) {
+    inputEl.classList.remove('invalid');
+    document.getElementById(msgId).classList.remove('show');
+  }
+
+  function validateForm() {
+    let valid = true;
+    clearError(stateSelect, 'state-error');
+    clearError(cityInput,   'city-error');
+    clearError(citySelect,  'city-error');
+    clearError(sfInput,     'sf-error');
+    clearError(yearInput,   'year-error');
+    clearError(typeSelect,  'type-error');
+
+    if (!stateSelect.value) { showError(stateSelect, 'state-error'); valid = false; }
+
+    const cityVal = getCityValue();
+    if (!cityVal) {
+      if (CITIES_BY_STATE[stateSelect.value]) showError(citySelect, 'city-error');
+      else showError(cityInput, 'city-error');
+      valid = false;
+    }
+
+    const sfVal = parseInt(sfInput.value, 10);
+    if (!sfInput.value || isNaN(sfVal) || sfVal < 1) { showError(sfInput, 'sf-error'); valid = false; }
+
+    const yearVal = parseInt(yearInput.value, 10);
+    if (!yearInput.value || isNaN(yearVal) || yearVal < 1800 || yearVal > 2026) {
+      showError(yearInput, 'year-error'); valid = false;
+    }
+
+    if (!typeSelect.value) { showError(typeSelect, 'type-error'); valid = false; }
+
+    return valid;
+  }
+
+  /* =============================================
+     STEP 1 SUBMIT
+  ============================================= */
+  buildingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    currentData = {
+      state:        stateSelect.value,
+      city:         getCityValue(),
+      sf:           parseInt(sfInput.value, 10),
+      buildingType: typeSelect.value,
+      yearBuilt:    parseInt(yearInput.value, 10),
+    };
+
+    // Pre-calculate laws for gate preview
+    applicableLaws = getApplicableLaws(
+      currentData.state, currentData.city, currentData.sf,
+      currentData.buildingType, currentData.yearBuilt, false
+    );
+
+    // Populate gate preview
+    const stateName = stateSelect.options[stateSelect.selectedIndex].text;
+    document.getElementById('gate-preview').innerHTML =
+      `<strong>Building:</strong> ${currentData.sf.toLocaleString()} SF ${currentData.buildingType} in ${currentData.city}, ${stateName}<br/>` +
+      `<strong>Applicable laws found:</strong> ${applicableLaws.length} regulation(s) identified`;
+
+    // Show email gate
+    emailGate.classList.add('active');
+    document.getElementById('email-input').focus();
+    setStep(2);
+  });
+
+  /* =============================================
+     EMAIL GATE
+  ============================================= */
+  function closeGate() {
+    emailGate.classList.remove('active');
+    setStep(1);
+  }
+
+  // Allow closing gate with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && emailGate.classList.contains('active')) closeGate();
+  });
+
+  getReportBtn.addEventListener('click', () => {
+    const email = emailInput.value.trim();
+    clearError(emailInput, 'email-error');
+    if (!email || !isValidEmail(email)) {
+      showError(emailInput, 'email-error');
+      return;
+    }
+
+    // Store in sessionStorage
+    currentData.email = email;
+    sessionStorage.setItem('gcs_lead_email', email);
+    sessionStorage.setItem('gcs_lead', JSON.stringify({
+      email,
+      state:        currentData.state,
+      city:         currentData.city,
+      sf:           currentData.sf,
+      buildingType: currentData.buildingType,
+      yearBuilt:    currentData.yearBuilt,
+      laws:         applicableLaws.map(l => l.id),
+      timestamp:    new Date().toISOString()
+    }));
+
+    // Populate Formspree hidden fields
+    document.getElementById('fs-email').value     = email;
+    document.getElementById('fs-state').value     = currentData.state;
+    document.getElementById('fs-city').value      = currentData.city;
+    document.getElementById('fs-sf').value        = currentData.sf;
+    document.getElementById('fs-type').value      = currentData.buildingType;
+    document.getElementById('fs-year').value      = currentData.yearBuilt;
+    document.getElementById('fs-laws').value      = applicableLaws.map(l => l.id).join(', ');
+    document.getElementById('fs-timestamp').value = new Date().toISOString();
+
+    // Close gate, show results
+    emailGate.classList.remove('active');
+    renderResults();
+    setStep(3);
+  });
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  /* =============================================
+     PROGRESS INDICATOR
+  ============================================= */
+  function setStep(step) {
+    for (let i = 1; i <= 3; i++) {
+      const el = document.getElementById(`step-indicator-${i}`);
+      el.classList.remove('active', 'done');
+      if (i < step)  el.classList.add('done');
+      if (i === step) el.classList.add('active');
+      // Replace number with checkmark for done steps
+      const num = el.querySelector('.step-num');
+      num.textContent = i < step ? '✓' : String(i);
+    }
+  }
+
+  /* =============================================
+     RENDER RESULTS
+  ============================================= */
+  function renderResults() {
+    formSection.classList.add('hidden');
+    resultsSection.classList.add('active');
+
+    const stateName = stateSelect.options[stateSelect.selectedIndex].text;
+    document.getElementById('results-title').textContent = 'Compliance Analysis Results';
+    document.getElementById('results-meta').textContent =
+      `${currentData.sf.toLocaleString()} SF ${currentData.buildingType} — ${currentData.city}, ${stateName} — Built ${currentData.yearBuilt}`;
+
+    const badge = document.getElementById('results-count-badge');
+
+    if (applicableLaws.length === 0) {
+      badge.textContent = '0 laws found';
+      badge.style.background = 'var(--teal)';
+      lawsContainer.innerHTML = buildNoMatchCard();
+    } else {
+      badge.textContent = `${applicableLaws.length} law${applicableLaws.length > 1 ? 's' : ''} apply`;
+      badge.style.background = 'var(--red)';
+      lawsContainer.innerHTML = applicableLaws.map(law => buildLawCard(law)).join('');
+    }
+
+    // Smooth scroll to results
+    setTimeout(() => {
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function buildLawCard(law) {
+    const sf = currentData.sf;
+
+    // SF badge
+    const sfMet = (law.sfCondition === 'gte')
+      ? sf >= law.sfThreshold
+      : true; // if we're rendering it, threshold was met
+    const sfBadgeClass = sfMet ? 'badge-green' : 'badge-red';
+    const sfBadgeText = sfMet
+      ? `&#10003; Your building qualifies (${sf.toLocaleString()} SF &ge; ${law.sfThreshold.toLocaleString()} SF threshold)`
+      : `&#10007; Below threshold`;
+
+    // Deadline badge
+    const dlBadgeClass = law.deadlineUrgent ? 'badge-urgent' : 'badge-yellow';
+    const dlIcon = law.deadlineUrgent ? '&#9888;' : '&#9200;';
+
+    // Penalty
+    let penaltyText;
+    try { penaltyText = law.penaltyFormula(sf); }
+    catch(e) { penaltyText = 'See notes'; }
+
+    // Requirements
+    const reqItems = (law.requirements || [])
+      .map(r => `<li>${escHtml(r)}</li>`)
+      .join('');
+
+    return `
+      <div class="law-card" id="law-${law.id}">
+        <div class="law-card-header">
+          <div>
+            <div class="law-name">${escHtml(law.name)}</div>
+            <span class="bill-badge">${escHtml(law.billNumber)}</span>
+          </div>
+        </div>
+        <div class="law-card-body">
+          <div class="law-meta-row">
+            <span class="badge ${sfBadgeClass}">${sfBadgeText}</span>
+            <span class="badge ${dlBadgeClass}">${dlIcon} Deadline: ${escHtml(law.deadlineText)}</span>
+          </div>
+
+          <div class="penalty-box">
+            <div class="penalty-label">Estimated Penalty Exposure</div>
+            <div class="penalty-value">
+              A ${sf.toLocaleString()} SF building faces: ${penaltyText}
+            </div>
+          </div>
+
+          <div class="req-section-label">Required Actions</div>
+          <ul class="req-list">${reqItems}</ul>
+
+          <a href="${law.serviceLink}" class="service-link">
+            &#10003; Recommended Service: ${escHtml(law.service)} &#8594;
+          </a>
+
+          ${law.notes ? `<div class="law-notes"><strong>Note:</strong> ${escHtml(law.notes)}</div>` : ''}
+        </div>
+      </div>
+    `;
+  }
+
+  function buildNoMatchCard() {
+    return `
+      <div class="no-match-card">
+        <div class="no-match-icon">&#10003;</div>
+        <div class="no-match-title">Good news — no major mandates identified</div>
+        <p class="no-match-text">
+          Based on the information provided, no major benchmarking or building performance mandates appear to apply to this building.
+          Requirements vary by jurisdiction and change frequently, so we recommend a professional
+          <strong>Compliance Assessment ($500)</strong> to confirm your status and stay ahead of emerging regulations.
+        </p>
+      </div>
+    `;
+  }
+
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* =============================================
+     RECALCULATE
+  ============================================= */
+  function recalculate() {
+    resultsSection.classList.remove('active');
+    formSection.classList.remove('hidden');
+    setStep(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* =============================================
+     CSV DOWNLOAD
+  ============================================= */
+  function downloadCSV() {
+    const lead = JSON.parse(sessionStorage.getItem('gcs_lead') || '{}');
+    const rows = [
+      ['Email','State','City','Square Footage','Building Type','Year Built','Applicable Laws','Timestamp'],
+      [
+        lead.email || '',
+        lead.state || '',
+        lead.city  || '',
+        lead.sf    || '',
+        lead.buildingType || '',
+        lead.yearBuilt    || '',
+        (lead.laws || []).join('; '),
+        lead.timestamp    || new Date().toISOString()
+      ]
+    ];
+    // Add law details rows
+    rows.push([]);
+    rows.push(['Law ID','Law Name','Bill Number','Deadline','Urgency','Penalty Formula']);
+    (applicableLaws || []).forEach(l => {
+      let penalty = '';
+      try { penalty = l.penaltyFormula(currentData.sf || 0); } catch(e) {}
+      rows.push([l.id, l.name, l.billNumber, l.deadlineText, l.deadlineUrgent ? 'URGENT' : 'Standard', penalty]);
+    });
+
+    const csvContent = rows.map(r =>
+      r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')
+    ).join('\r\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `GCS_Compliance_Report_${Date.now()}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  /* =============================================
+     RESTORE FROM SESSION (on page reload)
+  ============================================= */
+  (function restoreSession() {
+    try {
+      const stored = sessionStorage.getItem('gcs_lead');
+      if (!stored) return;
+      const lead = JSON.parse(stored);
+      if (!lead.email || !lead.state) return;
+      // Optionally pre-fill form
+      stateSelect.value  = lead.state  || '';
+      sfInput.value      = lead.sf     || '';
+      typeSelect.value   = lead.buildingType || '';
+      yearInput.value    = lead.yearBuilt    || '';
+      if (lead.state) stateSelect.dispatchEvent(new Event('change'));
+      setTimeout(() => {
+        if (CITIES_BY_STATE[lead.state]) citySelect.value = lead.city || '';
+        else cityInput.value = lead.city || '';
+      }, 50);
+    } catch(e) {/* ignore */}
+  })();
+  </script>
+</body>
+</html>

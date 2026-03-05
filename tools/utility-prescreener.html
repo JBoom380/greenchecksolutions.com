@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Utility Bill Pre-Screener — Green Check Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1B4332;
+    --primary-light: #2D6A4F;
+    --accent: #D4A017;
+    --teal: #40916C;
+    --tint: #D8F3DC;
+    --navy: #1E293B;
+    --bg: #F7FDF9;
+    --border: #E2E8F0;
+    --text-light: #64748B;
+    --red: #DC2626;
+    --red-light: #FEF2F2;
+    --yellow: #D97706;
+    --yellow-light: #FFFBEB;
+    --green-light: #F0FDF4;
+    --white: #FFFFFF;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  a { color: var(--primary-light); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--primary);
+    color: var(--white);
+    padding: 36px 20px 32px;
+    text-align: center;
+  }
+
+  .site-header .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .site-header h1 {
+    font-size: clamp(22px, 4vw, 32px);
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+
+  .site-header h1 .check {
+    color: #74C69D;
+    margin-right: 4px;
+  }
+
+  .site-header p {
+    font-size: clamp(14px, 2vw, 17px);
+    color: rgba(255,255,255,0.82);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    padding: 36px 20px 60px;
+  }
+
+  /* ── FORM CARD ── */
+  .form-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+
+  .form-card-header {
+    background: var(--tint);
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .form-card-header .step-num {
+    background: var(--primary);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .form-card-header h2 {
+    font-size: 16px;
+    color: var(--primary);
+  }
+
+  .form-card-body {
+    padding: 24px;
+  }
+
+  /* ── FIELD GRID ── */
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+  }
+
+  .field-grid.cols-4 {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  label .opt {
+    font-weight: 400;
+    color: var(--text-light);
+    font-size: 12px;
+  }
+
+  select, input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--navy);
+    background: var(--white);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748B' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+  }
+
+  select:focus, input[type="number"]:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(64,145,108,0.15);
+  }
+
+  /* Radio group */
+  .radio-group {
+    display: flex;
+    gap: 20px;
+    padding-top: 4px;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .radio-label input[type="radio"] {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--primary);
+    cursor: pointer;
+  }
+
+  /* ── TAB BAR ── */
+  .tab-section {
+    margin-top: 4px;
+  }
+
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 0;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  }
+
+  .tab-btn:hover { color: var(--primary-light); }
+
+  .tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+    background: var(--tint);
+  }
+
+  .tab-panel {
+    display: none;
+    padding: 20px 0 4px;
+  }
+
+  .tab-panel.active { display: block; }
+
+  /* ── DATA GRID TABLE ── */
+  .data-grid-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+
+  .data-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 400px;
+  }
+
+  .data-grid thead th {
+    background: var(--primary);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 10px 10px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .data-grid thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+  .data-grid thead th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+
+  .data-grid tbody tr:nth-child(even) td { background: #F8FAFB; }
+  .data-grid tbody tr:hover td { background: var(--tint); }
+
+  .data-grid td {
+    padding: 6px 6px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .data-grid td select,
+  .data-grid td input[type="number"] {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+
+  .data-grid td select { min-width: 120px; }
+  .data-grid td input[type="number"] { min-width: 80px; }
+
+  .opt-col { color: var(--text-light); font-size: 11px; }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    display: block;
+    width: 100%;
+    padding: 15px 24px;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+    text-align: center;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-light);
+    box-shadow: 0 4px 12px rgba(27,67,50,0.3);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-sm);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-decoration: none;
+  }
+
+  .btn-secondary:hover {
+    background: var(--primary);
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  /* ── ERROR ── */
+  .error-box {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-left: 4px solid var(--red);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #991B1B;
+    margin-top: 16px;
+    display: none;
+  }
+
+  .error-box.visible { display: block; }
+
+  /* ── LOADING ── */
+  #results-section { display: none; }
+  #results-section.visible { display: block; }
+
+  .loading-overlay {
+    text-align: center;
+    padding: 60px 20px;
+    display: none;
+  }
+
+  .loading-overlay.visible { display: block; }
+
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--tint);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 18px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-overlay p {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .loading-overlay small {
+    display: block;
+    color: var(--text-light);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  /* ── RESULTS ── */
+  .results-inner { display: none; }
+  .results-inner.visible { display: block; }
+
+  /* Summary banner */
+  .summary-banner {
+    background: var(--primary);
+    color: var(--white);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .summary-banner .findings-count {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 4px;
+  }
+
+  .summary-banner h2 {
+    font-size: clamp(18px, 3vw, 26px);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .summary-banner .savings-pill {
+    background: var(--accent);
+    color: var(--navy);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 18px;
+    border-radius: 24px;
+    white-space: nowrap;
+  }
+
+  /* Finding cards */
+  .findings-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .finding-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--border);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .finding-card.red { border-left-color: var(--red); }
+  .finding-card.yellow { border-left-color: var(--accent); }
+  .finding-card.green { border-left-color: var(--teal); }
+
+  .finding-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .finding-icon {
+    font-size: 20px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .finding-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .finding-body {
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  .finding-impact {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .finding-card.red .finding-impact { background: var(--red-light); color: #991B1B; }
+  .finding-card.yellow .finding-impact { background: var(--yellow-light); color: #92400E; }
+  .finding-card.green .finding-impact { background: var(--green-light); color: var(--primary); }
+
+  /* Disclaimer */
+  .disclaimer-box {
+    background: #F8FAFC;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .disclaimer-box strong {
+    color: var(--navy);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 32px 28px;
+    margin-bottom: 24px;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(18px, 3vw, 24px);
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .cta-section > p {
+    color: var(--text-light);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .audit-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .audit-card {
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .audit-card.featured {
+    border-color: var(--accent);
+    background: #FFFDF5;
+    position: relative;
+  }
+
+  .audit-card.featured::before {
+    content: "Most Popular";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--navy);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 3px 12px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+
+  .audit-card h3 {
+    font-size: 16px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .audit-card .price {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .audit-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  .cta-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--teal);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+    margin-bottom: 14px;
+  }
+
+  .cta-btn:hover {
+    background: var(--primary);
+    box-shadow: 0 4px 14px rgba(27,67,50,0.35);
+    transform: translateY(-1px);
+    text-decoration: none;
+    color: var(--white);
+  }
+
+  .cta-email {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-light);
+  }
+
+  .cta-email a { color: var(--primary-light); font-weight: 600; }
+
+  /* ── RESULTS ACTION BAR ── */
+  .results-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .results-actions .left-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    text-decoration: none;
+  }
+
+  .btn-ghost:hover {
+    background: var(--tint);
+    color: var(--primary);
+    border-color: var(--teal);
+    text-decoration: none;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--primary);
+    color: rgba(255,255,255,0.65);
+    text-align: center;
+    padding: 22px 20px;
+    font-size: 13px;
+  }
+
+  .site-footer a { color: rgba(255,255,255,0.85); }
+  .site-footer strong { color: var(--white); }
+
+  /* ── UTILITY ── */
+  .mt-16 { margin-top: 16px; }
+  .mt-20 { margin-top: 20px; }
+  .section-note {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 10px;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .site-header, .form-card, #analyze-btn-wrap, .cta-section, .results-actions, .site-footer { display: none !important; }
+    #results-section, .results-inner { display: block !important; }
+    .summary-banner { background: #1B4332 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .finding-card { break-inside: avoid; }
+    body { background: white; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .field-grid { grid-template-columns: 1fr 1fr; }
+    .audit-cards { grid-template-columns: 1fr; }
+    .summary-banner { flex-direction: column; align-items: flex-start; }
+    .tab-btn { padding: 8px 12px; font-size: 13px; }
+    .form-card-body { padding: 16px; }
+    .cta-section { padding: 24px 18px; }
+  }
+
+  @media (max-width: 420px) {
+    .field-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 1 — HEADER
+════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="container">
+    <div class="badge">
+      <span>&#10003;</span>
+      <span>Free Tool — No Account Required</span>
+    </div>
+    <h1><span class="check">&#10003;</span> Green Check Solutions — Free Utility Bill Pre-Screener</h1>
+    <p>Find out in 5 minutes if your utility bills have hidden savings opportunities</p>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════════════ -->
+<main>
+<div class="container">
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 2 — INPUT FORM
+════════════════════════════════════════════════════ -->
+<div id="form-section">
+
+  <!-- Step 1: Organization Info -->
+  <div class="form-card">
+    <div class="form-card-header">
+      <div class="step-num">1</div>
+      <h2>Tell us about your organization</h2>
+    </div>
+    <div class="form-card-body">
+      <div class="field-grid cols-4">
+
+        <div class="field-group">
+          <label for="state">State</label>
+          <select id="state">
+            <option value="">— Select State —</option>
+            <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+            <option>Arkansas</option><option>California</option><option>Colorado</option>
+            <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+            <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+            <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+            <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+            <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+            <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+            <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+            <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+            <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+            <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+            <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+            <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+            <option>Texas</option><option>Utah</option><option>Vermont</option>
+            <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+            <option>Wisconsin</option><option>Wyoming</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="entity-type">Entity Type</label>
+          <select id="entity-type">
+            <option value="">— Select Type —</option>
+            <option value="commercial">Commercial</option>
+            <option value="education">Education</option>
+            <option value="nonprofit">Nonprofit</option>
+            <option value="government">Government</option>
+            <option value="manufacturing">Manufacturing</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="annual-spend">Annual Utility Spend <span class="opt">(optional)</span></label>
+          <input type="number" id="annual-spend" placeholder="e.g. 85000" min="0" step="1000">
+        </div>
+
+        <div class="field-group">
+          <label>Prior Professional Audit?</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="prior-audit" value="yes"> Yes
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="prior-audit" value="no" checked> No
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: Bill Data -->
+  <div class="form-card">
+    <div class="form-card-header">
+      <div class="step-num">2</div>
+      <h2>Enter your utility bill data</h2>
+    </div>
+    <div class="form-card-body">
+
+      <p class="section-note">Enter at least 3 months of data in at least one utility tab. Leave rows blank to skip.</p>
+
+      <div class="tab-section mt-16">
+        <div class="tab-bar" role="tablist">
+          <button class="tab-btn active" role="tab" aria-selected="true" data-tab="electric">&#9889; Electric</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-tab="gas">&#128293; Natural Gas</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-tab="water">&#128167; Water</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-tab="sewer">&#9891; Sewer</button>
+        </div>
+
+        <!-- Electric Tab -->
+        <div class="tab-panel active" id="tab-electric" role="tabpanel">
+          <div class="data-grid-wrap">
+            <table class="data-grid" id="grid-electric">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Bill ($)</th>
+                  <th>Usage (kWh)</th>
+                  <th>Demand (kW) <span class="opt-col">opt.</span></th>
+                  <th>Days</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-electric"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Natural Gas Tab -->
+        <div class="tab-panel" id="tab-gas" role="tabpanel">
+          <div class="data-grid-wrap">
+            <table class="data-grid" id="grid-gas">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Bill ($)</th>
+                  <th>Usage (therms)</th>
+                  <th>Days</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-gas"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Water Tab -->
+        <div class="tab-panel" id="tab-water" role="tabpanel">
+          <div class="data-grid-wrap">
+            <table class="data-grid" id="grid-water">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Bill ($)</th>
+                  <th>Usage (kGal)</th>
+                  <th>Days</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-water"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Sewer Tab -->
+        <div class="tab-panel" id="tab-sewer" role="tabpanel">
+          <div class="data-grid-wrap">
+            <table class="data-grid" id="grid-sewer">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Bill ($)</th>
+                  <th>Usage (kGal)</th>
+                  <th>Days</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-sewer"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /tab-section -->
+    </div><!-- /form-card-body -->
+  </div><!-- /form-card -->
+
+  <div id="analyze-btn-wrap">
+    <button class="btn-primary" id="analyze-btn" onclick="runAnalysis()">
+      &#128269; Analyze My Bills
+    </button>
+    <div id="error-box" class="error-box">
+      Please enter at least 3 months of data (Month + Bill + Usage) in at least one utility tab before analyzing.
+    </div>
+  </div>
+
+</div><!-- /form-section -->
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 3 — RESULTS
+════════════════════════════════════════════════════ -->
+<div id="results-section">
+
+  <!-- Loading state -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="spinner"></div>
+    <p>Analyzing your utility data&hellip;</p>
+    <small>Checking rates, demand patterns, and exemption eligibility</small>
+  </div>
+
+  <!-- Actual results -->
+  <div class="results-inner" id="results-inner">
+
+    <div class="results-actions">
+      <div class="left-actions">
+        <a href="#" class="btn-ghost" onclick="resetForm(); return false;">
+          &#8592; Run Another Analysis
+        </a>
+        <button class="btn-ghost" onclick="window.print()">
+          &#128438; Print Report
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary banner -->
+    <div class="summary-banner" id="summary-banner">
+      <div>
+        <div class="findings-count" id="findings-count-label"></div>
+        <h2 id="summary-heading"></h2>
+      </div>
+      <div class="savings-pill" id="savings-pill"></div>
+    </div>
+
+    <!-- Finding cards -->
+    <div class="findings-grid" id="findings-grid"></div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer-box">
+      <strong>Important Disclaimer</strong>
+      This is a preliminary screening based on the data you provided and general industry benchmarks.
+      Actual savings depend on your specific utility tariff, rate schedule, and complete account history.
+      A professional audit by Green Check Solutions will quantify all findings precisely and identify
+      additional opportunities specific to your accounts.
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <h2>Ready to see exact numbers?</h2>
+      <p>Our professional auditors will analyze your actual tariff and identify every dollar you&rsquo;re overpaying.</p>
+
+      <div class="audit-cards">
+        <div class="audit-card">
+          <h3>Quick Audit</h3>
+          <div class="price">From $200</div>
+          <p>Single utility, single site. Ideal for getting started with one account.</p>
+        </div>
+        <div class="audit-card featured">
+          <h3>Comprehensive Audit</h3>
+          <div class="price">From $500</div>
+          <p>All utilities, full analysis across all accounts. Maximum savings potential.</p>
+        </div>
+      </div>
+
+      <a href="../website/index.html#contact" class="cta-btn">
+        &#128197; Schedule a Free 15-Minute Consultation
+      </a>
+      <div class="cta-email">
+        Or email us directly: <a href="mailto:info@greenchecksolutions.com">info@greenchecksolutions.com</a>
+      </div>
+    </div>
+
+  </div><!-- /results-inner -->
+</div><!-- /results-section -->
+
+</div><!-- /container -->
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <strong>Green Check Solutions</strong> &mdash;
+    <a href="mailto:info@greenchecksolutions.com">info@greenchecksolutions.com</a> &mdash;
+    <a href="http://www.greenchecksolutions.com" target="_blank" rel="noopener">www.greenchecksolutions.com</a>
+    <br><br>
+    &copy; <span id="footer-year"></span> Green Check Solutions. This tool provides preliminary estimates only.
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── CONSTANTS ──────────────────────────────────────
+  const MONTHS_LABEL = [
+    'Jan','Feb','Mar','Apr','May','Jun',
+    'Jul','Aug','Sep','Oct','Nov','Dec'
+  ];
+
+  const TAX_EXEMPT_STATES_EDU = ['Washington','California','Texas','Oregon','Idaho'];
+  const TAX_EXEMPT_STATES_MFG = ['Washington','Oregon','Idaho','Texas'];
+
+  // ── BUILD MONTH OPTIONS ─────────────────────────────
+  function buildMonthOptions() {
+    const now = new Date();
+    const options = ['<option value="">— Month —</option>'];
+    // Jan 2024 through current month
+    const start = new Date(2024, 0, 1);
+    const end   = new Date(now.getFullYear(), now.getMonth(), 1);
+    let d = new Date(start);
+    while (d <= end) {
+      const val = `${MONTHS_LABEL[d.getMonth()]} ${d.getFullYear()}`;
+      options.push(`<option value="${val}">${val}</option>`);
+      d.setMonth(d.getMonth() + 1);
+    }
+    return options.join('');
+  }
+
+  const MONTH_OPTIONS_HTML = buildMonthOptions();
+
+  // ── BUILD TABLE ROWS ────────────────────────────────
+  function buildElectricRow(idx) {
+    return `<tr>
+      <td><select class="month-sel" data-row="${idx}">${MONTH_OPTIONS_HTML}</select></td>
+      <td><input type="number" class="e-bill" min="0" step="0.01" placeholder="0.00"></td>
+      <td><input type="number" class="e-kwh"  min="0" step="1"    placeholder="0"></td>
+      <td><input type="number" class="e-kw"   min="0" step="0.1"  placeholder="opt."></td>
+      <td><input type="number" class="e-days" min="1" max="31" step="1" placeholder="30"></td>
+    </tr>`;
+  }
+
+  function buildGasRow(idx) {
+    return `<tr>
+      <td><select class="month-sel" data-row="${idx}">${MONTH_OPTIONS_HTML}</select></td>
+      <td><input type="number" class="g-bill"   min="0" step="0.01" placeholder="0.00"></td>
+      <td><input type="number" class="g-therms" min="0" step="1"    placeholder="0"></td>
+      <td><input type="number" class="g-days"   min="1" max="31" step="1" placeholder="30"></td>
+    </tr>`;
+  }
+
+  function buildWaterSewerRow(idx, prefix) {
+    return `<tr>
+      <td><select class="month-sel" data-row="${idx}">${MONTH_OPTIONS_HTML}</select></td>
+      <td><input type="number" class="${prefix}-bill"  min="0" step="0.01" placeholder="0.00"></td>
+      <td><input type="number" class="${prefix}-kgal"  min="0" step="0.01" placeholder="0"></td>
+      <td><input type="number" class="${prefix}-days"  min="1" max="31" step="1" placeholder="30"></td>
+    </tr>`;
+  }
+
+  function populateGrids() {
+    const elec  = document.getElementById('tbody-electric');
+    const gas   = document.getElementById('tbody-gas');
+    const water = document.getElementById('tbody-water');
+    const sewer = document.getElementById('tbody-sewer');
+    let html;
+
+    html = '';
+    for (let i = 0; i < 6; i++) html += buildElectricRow(i);
+    elec.innerHTML = html;
+
+    html = '';
+    for (let i = 0; i < 6; i++) html += buildGasRow(i);
+    gas.innerHTML = html;
+
+    html = '';
+    for (let i = 0; i < 6; i++) html += buildWaterSewerRow(i, 'w');
+    water.innerHTML = html;
+
+    html = '';
+    for (let i = 0; i < 6; i++) html += buildWaterSewerRow(i, 's');
+    sewer.innerHTML = html;
+  }
+
+  // ── TAB SWITCHING ───────────────────────────────────
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+      document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ── DATA COLLECTION ─────────────────────────────────
+  function readElectricData() {
+    const rows = [];
+    document.querySelectorAll('#tbody-electric tr').forEach(tr => {
+      const month  = tr.querySelector('.month-sel').value;
+      const bill   = parseFloat(tr.querySelector('.e-bill').value);
+      const kwh    = parseFloat(tr.querySelector('.e-kwh').value);
+      const kw     = parseFloat(tr.querySelector('.e-kw').value);
+      const days   = parseFloat(tr.querySelector('.e-days').value);
+      if (month && !isNaN(bill) && !isNaN(kwh)) {
+        rows.push({ month, bill, kwh, kw: isNaN(kw) ? null : kw, days: isNaN(days) ? 30 : days });
+      }
+    });
+    return rows;
+  }
+
+  function readGasData() {
+    const rows = [];
+    document.querySelectorAll('#tbody-gas tr').forEach(tr => {
+      const month  = tr.querySelector('.month-sel').value;
+      const bill   = parseFloat(tr.querySelector('.g-bill').value);
+      const therms = parseFloat(tr.querySelector('.g-therms').value);
+      const days   = parseFloat(tr.querySelector('.g-days').value);
+      if (month && !isNaN(bill) && !isNaN(therms)) {
+        rows.push({ month, bill, therms, days: isNaN(days) ? 30 : days });
+      }
+    });
+    return rows;
+  }
+
+  function readWaterSewerData(prefix) {
+    const rows = [];
+    document.querySelectorAll(`#tbody-${prefix === 'w' ? 'water' : 'sewer'} tr`).forEach(tr => {
+      const month = tr.querySelector('.month-sel').value;
+      const bill  = parseFloat(tr.querySelector(`.${prefix}-bill`).value);
+      const kgal  = parseFloat(tr.querySelector(`.${prefix}-kgal`).value);
+      const days  = parseFloat(tr.querySelector(`.${prefix}-days`).value);
+      if (month && !isNaN(bill) && !isNaN(kgal)) {
+        rows.push({ month, bill, kgal, days: isNaN(days) ? 30 : days });
+      }
+    });
+    return rows;
+  }
+
+  // ── VALIDATION ──────────────────────────────────────
+  function validateData(elec, gas, water, sewer) {
+    return elec.length >= 3 || gas.length >= 3 || water.length >= 3 || sewer.length >= 3;
+  }
+
+  // ── FORMATTING ──────────────────────────────────────
+  function fmt$(n) {
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function fmtRange(low, high) {
+    return `${fmt$(low)} – ${fmt$(high)}/year`;
+  }
+
+  // ── ANALYSIS LOGIC ──────────────────────────────────
+  function analyzeElectric(rows) {
+    const findings = [];
+
+    if (rows.length < 2) return findings;
+
+    const totalBill  = rows.reduce((s, r) => s + r.bill, 0);
+    const totalKwh   = rows.reduce((s, r) => s + r.kwh,  0);
+
+    // 1. Load Factor
+    const demandRows = rows.filter(r => r.kw !== null && r.kw > 0 && r.days > 0);
+    if (demandRows.length >= 2) {
+      const lfValues = demandRows.map(r => (r.kwh / (r.kw * r.days * 24)) * 100);
+      const avgLF    = lfValues.reduce((a, b) => a + b, 0) / lfValues.length;
+
+      if (avgLF < 25) {
+        findings.push({
+          type: 'red',
+          icon: '&#9888;',
+          title: 'Critical Demand Reduction Opportunity',
+          body: `Your average electric load factor is ${avgLF.toFixed(1)}%, which is critically low. This indicates you are paying for significant peak demand that vastly exceeds your average consumption — a primary target for demand management strategies.`,
+          low: totalBill * 0.10,
+          high: totalBill * 0.20
+        });
+      } else if (avgLF < 40) {
+        findings.push({
+          type: 'yellow',
+          icon: '&#9888;',
+          title: 'High Demand Reduction Opportunity',
+          body: `Your average load factor of ${avgLF.toFixed(1)}% falls in the high-opportunity range (25–40%). Demand response programs, load shifting, or power factor correction could meaningfully reduce your monthly demand charges.`,
+          low: totalBill * 0.06,
+          high: totalBill * 0.12
+        });
+      } else if (avgLF <= 60) {
+        findings.push({
+          type: 'green',
+          icon: '&#10003;',
+          title: 'Moderate Load Profile',
+          body: `Your average load factor of ${avgLF.toFixed(1)}% is within a moderate range. Your demand profile is reasonably efficient, though targeted optimization could still yield incremental savings.`,
+          low: totalBill * 0.02,
+          high: totalBill * 0.06
+        });
+      }
+
+      // 2. Demand Variability
+      const demands  = demandRows.map(r => r.kw);
+      const peakDem  = Math.max(...demands);
+      const minDem   = Math.min(...demands);
+      const ratio    = minDem > 0 ? peakDem / minDem : null;
+
+      if (ratio !== null && ratio > 3.0) {
+        findings.push({
+          type: 'red',
+          icon: '&#9889;',
+          title: 'Significant Demand Spikes — Possible Ratchet Overcharge',
+          body: `Your peak demand is ${ratio.toFixed(1)}x higher than your minimum monthly demand. Many utilities apply ratchet clauses that bill you based on peak demand for 6–12 months, potentially causing substantial overcharges you may not be aware of.`,
+          low: totalBill * 0.08,
+          high: totalBill * 0.18
+        });
+      } else if (ratio !== null && ratio > 2.0) {
+        findings.push({
+          type: 'yellow',
+          icon: '&#9889;',
+          title: 'Demand Variability Detected — Review Demand Charges',
+          body: `Your peak-to-minimum demand ratio of ${ratio.toFixed(1)}x suggests variable operational patterns. Reviewing your tariff's ratchet provisions and implementing demand-smoothing measures could reduce your demand charge exposure.`,
+          low: totalBill * 0.04,
+          high: totalBill * 0.10
+        });
+      }
+    }
+
+    // 3. Effective Rate
+    if (totalKwh > 0) {
+      const effRate = totalBill / totalKwh;
+      if (effRate > 0.25) {
+        findings.push({
+          type: 'red',
+          icon: '&#128200;',
+          title: 'High Effective Rate — Possible Rate Misclassification',
+          body: `Your blended electric rate of ${(effRate * 100).toFixed(1)}¢/kWh is significantly above average. This can indicate you are on the wrong rate schedule, have avoidable surcharges applied, or are missing available rate riders that would lower your cost.`,
+          low: totalBill * 0.08,
+          high: totalBill * 0.20
+        });
+      } else if (effRate > 0.20) {
+        findings.push({
+          type: 'yellow',
+          icon: '&#128200;',
+          title: 'Above-Average Effective Rate — Rate Optimization May Apply',
+          body: `At ${(effRate * 100).toFixed(1)}¢/kWh, your blended rate is above the commercial average. An audit would compare all available rate schedules on your utility's tariff to determine if a more favorable option exists.`,
+          low: totalBill * 0.04,
+          high: totalBill * 0.10
+        });
+      } else if (effRate < 0.08) {
+        findings.push({
+          type: 'yellow',
+          icon: '&#128269;',
+          title: 'Below-Average Rate — Verify Rate Schedule',
+          body: `Your effective rate of ${(effRate * 100).toFixed(1)}¢/kWh is below typical commercial ranges. While this may reflect favorable pricing, it can also indicate usage data errors or a rate schedule that may not include all charges being billed.`,
+          low: 0,
+          high: totalBill * 0.05
+        });
+      }
+    }
+
+    // 4. Usage Anomalies
+    if (rows.length >= 3) {
+      const avgKwh   = rows.reduce((s, r) => s + r.kwh, 0) / rows.length;
+      const anomalies = rows.filter(r => r.kwh > avgKwh * 1.5);
+      if (anomalies.length > 0) {
+        const names = anomalies.map(r => r.month).join(', ');
+        findings.push({
+          type: 'yellow',
+          icon: '&#128396;',
+          title: 'Usage Anomalies Detected — Possible Estimated Reads',
+          body: `Usage in ${names} exceeds 150% of your average monthly consumption. Anomalous spikes can indicate estimated meter reads that were later corrected, meter malfunctions, or billing errors that may entitle you to a billing adjustment or credit.`,
+          low: totalBill * 0.01,
+          high: totalBill * 0.05
+        });
+      }
+    }
+
+    return findings;
+  }
+
+  function analyzeGas(rows) {
+    const findings = [];
+    if (rows.length < 2) return findings;
+
+    const totalBill   = rows.reduce((s, r) => s + r.bill, 0);
+    const totalTherms = rows.reduce((s, r) => s + r.therms, 0);
+
+    if (totalTherms > 0) {
+      const effRate = totalBill / totalTherms;
+      if (effRate > 2.50) {
+        findings.push({
+          type: 'red',
+          icon: '&#128293;',
+          title: 'High Natural Gas Rate — Tariff Review Recommended',
+          body: `Your blended gas rate of $${effRate.toFixed(2)}/therm is above typical commercial rates. Rate misclassification, excess demand charges, or missed interruptible service options could be contributing to elevated costs.`,
+          low: totalBill * 0.05,
+          high: totalBill * 0.15
+        });
+      } else if (effRate > 1.80) {
+        findings.push({
+          type: 'yellow',
+          icon: '&#128293;',
+          title: 'Above-Average Gas Rate — Optimization Possible',
+          body: `At $${effRate.toFixed(2)}/therm, your gas rate is above the commercial midpoint. Depending on your load profile and service class, alternative tariff options or transportation arrangements may offer better economics.`,
+          low: totalBill * 0.03,
+          high: totalBill * 0.08
+        });
+      }
+    }
+
+    // Gas anomalies
+    if (rows.length >= 3) {
+      const avgTherms  = rows.reduce((s, r) => s + r.therms, 0) / rows.length;
+      const anomalies  = rows.filter(r => r.therms > avgTherms * 1.5);
+      if (anomalies.length > 0) {
+        const names = anomalies.map(r => r.month).join(', ');
+        findings.push({
+          type: 'yellow',
+          icon: '&#128396;',
+          title: 'Natural Gas Usage Anomalies',
+          body: `Gas usage in ${names} is more than 150% of your monthly average. Unusual spikes may indicate estimated reads, equipment inefficiencies, or potential billing discrepancies worth investigating.`,
+          low: totalBill * 0.01,
+          high: totalBill * 0.04
+        });
+      }
+    }
+
+    return findings;
+  }
+
+  function analyzeWaterSewer(rows, label) {
+    const findings = [];
+    if (rows.length < 2) return findings;
+
+    const totalBill = rows.reduce((s, r) => s + r.bill, 0);
+    const totalKgal = rows.reduce((s, r) => s + r.kgal, 0);
+
+    if (totalKgal > 0) {
+      const effRate = totalBill / totalKgal;
+      if (effRate > 20) {
+        findings.push({
+          type: 'yellow',
+          icon: '&#128167;',
+          title: `High ${label} Rate — Rate Classification Review`,
+          body: `Your ${label.toLowerCase()} cost of $${effRate.toFixed(2)}/kGal is above typical commercial benchmarks. Meter size, service class, or assessed demand charges may be misaligned with your actual usage patterns.`,
+          low: totalBill * 0.03,
+          high: totalBill * 0.10
+        });
+      }
+    }
+
+    // Anomalies
+    if (rows.length >= 3) {
+      const avgKgal   = rows.reduce((s, r) => s + r.kgal, 0) / rows.length;
+      const anomalies = rows.filter(r => r.kgal > avgKgal * 1.5);
+      if (anomalies.length > 0) {
+        const names = anomalies.map(r => r.month).join(', ');
+        findings.push({
+          type: 'yellow',
+          icon: '&#128396;',
+          title: `${label} Usage Anomalies`,
+          body: `${label} usage in ${names} is more than 150% of your monthly average, which may indicate a leak, meter error, or billing anomaly that warrants investigation and potential credit.`,
+          low: totalBill * 0.01,
+          high: totalBill * 0.05
+        });
+      }
+    }
+
+    return findings;
+  }
+
+  function analyzeTaxExemption(state, entityType, annualSpend) {
+    const findings = [];
+    if (!state || !entityType || annualSpend <= 0) return findings;
+
+    let eligible = false;
+    let reason   = '';
+
+    if (entityType === 'education' && TAX_EXEMPT_STATES_EDU.includes(state)) {
+      eligible = true;
+      reason   = `Educational institutions in ${state} may qualify for a utility sales tax exemption on electricity and natural gas used for educational purposes.`;
+    } else if (entityType === 'nonprofit') {
+      eligible = true;
+      reason   = 'Nonprofit organizations are typically exempt from utility sales tax in most states, though the specific exemption process and eligible utilities vary by jurisdiction.';
+    } else if (entityType === 'government') {
+      eligible = true;
+      reason   = 'Government entities are generally exempt from utility sales taxes and many utility surcharges, and may be entitled to refunds for taxes already paid in prior years.';
+    } else if (entityType === 'manufacturing' && TAX_EXEMPT_STATES_MFG.includes(state)) {
+      eligible = true;
+      reason   = `${state} provides manufacturing process energy exemptions that can exclude electricity and gas used directly in production from state sales tax, which could significantly reduce your effective utility cost.`;
+    }
+
+    if (eligible) {
+      const low3yr  = annualSpend * 0.05 * 3;
+      const high3yr = annualSpend * 0.10 * 3;
+      findings.push({
+        type: 'green',
+        icon: '&#127381;',
+        title: 'Potential Tax Exemption Identified',
+        body: reason + ' Based on your profile, you may qualify for ongoing exemptions and retroactive refunds for up to 3 years of prior payments.',
+        low: annualSpend * 0.05,
+        high: annualSpend * 0.10,
+        extra: `3-year refund potential: ${fmt$(low3yr)} – ${fmt$(high3yr)}`
+      });
+    }
+
+    return findings;
+  }
+
+  // ── MAIN ANALYSIS RUNNER ────────────────────────────
+  window.runAnalysis = function () {
+    const errorBox = document.getElementById('error-box');
+    errorBox.classList.remove('visible');
+
+    const elecRows  = readElectricData();
+    const gasRows   = readGasData();
+    const waterRows = readWaterSewerData('w');
+    const sewerRows = readWaterSewerData('s');
+
+    if (!validateData(elecRows, gasRows, waterRows, sewerRows)) {
+      errorBox.classList.add('visible');
+      errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Show results section and loading
+    const resultsSection = document.getElementById('results-section');
+    const loadingOverlay = document.getElementById('loading-overlay');
+    const resultsInner   = document.getElementById('results-inner');
+
+    resultsSection.style.display = 'block';
+    loadingOverlay.classList.add('visible');
+    resultsInner.classList.remove('visible');
+
+    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    setTimeout(function () {
+      loadingOverlay.classList.remove('visible');
+      buildResults(elecRows, gasRows, waterRows, sewerRows);
+      resultsInner.classList.add('visible');
+    }, 1500);
+  };
+
+  function buildResults(elecRows, gasRows, waterRows, sewerRows) {
+    const state      = document.getElementById('state').value;
+    const entityType = document.getElementById('entity-type').value;
+    const userSpend  = parseFloat(document.getElementById('annual-spend').value);
+
+    // Compute annual spend estimate
+    const allBills = [
+      ...elecRows.map(r  => r.bill),
+      ...gasRows.map(r   => r.bill),
+      ...waterRows.map(r => r.bill),
+      ...sewerRows.map(r => r.bill)
+    ];
+    const totalMonthsOfData = Math.max(elecRows.length, gasRows.length, waterRows.length, sewerRows.length);
+    const avgMonthlyBill    = allBills.length > 0 ? allBills.reduce((a, b) => a + b, 0) / totalMonthsOfData : 0;
+    const annualSpend       = (!isNaN(userSpend) && userSpend > 0) ? userSpend : avgMonthlyBill * 12;
+
+    // Run all analyses
+    let findings = [];
+    findings = findings.concat(analyzeElectric(elecRows));
+    findings = findings.concat(analyzeGas(gasRows));
+    findings = findings.concat(analyzeWaterSewer(waterRows, 'Water'));
+    findings = findings.concat(analyzeWaterSewer(sewerRows, 'Sewer'));
+    findings = findings.concat(analyzeTaxExemption(state, entityType, annualSpend));
+
+    // Overall savings estimate
+    const savingsLow  = annualSpend * 0.05;
+    const savingsHigh = annualSpend * 0.15;
+
+    // If no findings at all, add a baseline note
+    if (findings.length === 0) {
+      findings.push({
+        type: 'green',
+        icon: '&#10003;',
+        title: 'No Major Red Flags in Entered Data',
+        body: 'Based on the data provided, no critical billing issues were automatically detected. However, a professional audit reviews your actual tariff schedule, account history, and utility contracts — often uncovering issues that data alone cannot reveal.',
+        low: savingsLow * 0.3,
+        high: savingsHigh * 0.5
+      });
+    }
+
+    // Populate summary
+    const redCount    = findings.filter(f => f.type === 'red').length;
+    const yellowCount = findings.filter(f => f.type === 'yellow').length;
+    const greenCount  = findings.filter(f => f.type === 'green').length;
+    const total       = findings.length;
+
+    document.getElementById('findings-count-label').textContent =
+      `${total} finding${total !== 1 ? 's' : ''} identified`;
+
+    document.getElementById('summary-heading').textContent =
+      annualSpend > 0
+        ? `Based on ~${fmt$(annualSpend)}/year in utility spend, a professional audit typically identifies ${fmt$(savingsLow)} – ${fmt$(savingsHigh)} in annual savings.`
+        : 'Enter your annual spend above for a more precise savings estimate.';
+
+    document.getElementById('savings-pill').textContent =
+      annualSpend > 0 ? `Est. Savings: ${fmt$(savingsLow)} – ${fmt$(savingsHigh)}/yr` : `${total} Findings`;
+
+    // Render finding cards
+    const grid = document.getElementById('findings-grid');
+    grid.innerHTML = '';
+
+    findings.forEach(function (f) {
+      const impactStr = (f.low > 0 || f.high > 0) ? fmtRange(f.low, f.high) : 'Impact to be quantified by audit';
+      const extraHtml = f.extra ? `<div style="margin-top:8px;font-size:13px;font-weight:600;color:var(--primary);">&#128197; ${f.extra}</div>` : '';
+      const card = document.createElement('div');
+      card.className = `finding-card ${f.type}`;
+      card.innerHTML = `
+        <div class="finding-header">
+          <div class="finding-icon">${f.icon}</div>
+          <div class="finding-title">${f.title}</div>
+        </div>
+        <div class="finding-body">${f.body}</div>
+        ${extraHtml}
+        <div style="margin-top:12px;">
+          <span class="finding-impact">&#128181; Estimated Impact: ${impactStr}</span>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // ── RESET ───────────────────────────────────────────
+  window.resetForm = function () {
+    document.getElementById('state').value       = '';
+    document.getElementById('entity-type').value = '';
+    document.getElementById('annual-spend').value = '';
+    document.querySelectorAll('input[name="prior-audit"]').forEach(r => {
+      r.checked = r.value === 'no';
+    });
+    populateGrids();
+    document.getElementById('error-box').classList.remove('visible');
+    document.getElementById('results-section').style.display = 'none';
+    document.getElementById('loading-overlay').classList.remove('visible');
+    document.getElementById('results-inner').classList.remove('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // ── FOOTER YEAR ─────────────────────────────────────
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // ── INIT ─────────────────────────────────────────────
+  populateGrids();
+
+})();
+</script>
+</body>
+</html>
