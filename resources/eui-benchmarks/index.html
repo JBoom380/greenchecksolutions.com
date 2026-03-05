@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EUI Benchmarks by Building Type — Energy Use Intensity Reference | Green Check Solutions</title>
+<meta name="description" content="Energy Use Intensity (EUI) benchmarks by building type. Compare your building's EUI to national medians, ENERGY STAR targets, and building performance standard thresholds.">
+<meta name="keywords" content="EUI benchmarks by building type, energy use intensity by building type, what is a good EUI score, EUI office building, ENERGY STAR EUI targets, building performance standard EUI">
+<meta name="author" content="John Slagboom, CEM — Green Check Solutions LLC">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.greenchecksolutions.com/resources/eui-benchmarks/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="EUI Benchmarks by Building Type — Energy Use Intensity Reference | Green Check Solutions">
+<meta property="og:description" content="Energy Use Intensity (EUI) benchmarks by building type. Compare your building's EUI to national medians, ENERGY STAR targets, and building performance standard thresholds.">
+<meta property="og:url" content="https://www.greenchecksolutions.com/resources/eui-benchmarks/">
+<meta property="og:site_name" content="Green Check Solutions">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EUI Benchmarks by Building Type | Green Check Solutions">
+<meta name="twitter:description" content="Compare your building's EUI to national medians, ENERGY STAR targets, and BPS compliance thresholds by building type.">
+
+<!-- Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.greenchecksolutions.com/resources/eui-benchmarks/",
+      "url": "https://www.greenchecksolutions.com/resources/eui-benchmarks/",
+      "name": "EUI Benchmarks by Building Type — Energy Use Intensity Reference",
+      "description": "Energy Use Intensity (EUI) benchmarks by building type. Compare your building's EUI to national medians, ENERGY STAR targets, and building performance standard thresholds.",
+      "isPartOf": { "@id": "https://www.greenchecksolutions.com/" },
+      "author": {
+        "@type": "Person",
+        "name": "John Slagboom",
+        "jobTitle": "Certified Energy Manager (CEM)",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Green Check Solutions LLC"
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.greenchecksolutions.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Resources", "item": "https://www.greenchecksolutions.com/resources/" },
+          { "@type": "ListItem", "position": 3, "name": "EUI Benchmarks", "item": "https://www.greenchecksolutions.com/resources/eui-benchmarks/" }
+        ]
+      },
+      "dateModified": "2026-03-04"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a good EUI score for an office building?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The median US EUI for office buildings is approximately 78 kBtu/SF/yr. An ENERGY STAR score of 50 corresponds to an EUI of roughly 65 kBtu/SF/yr. The Washington CBPS compliance target for offices is 50 kBtu/SF/yr. Generally, an office EUI below 50 is excellent, 50–65 is good, 65–80 is average, and above 80 warrants improvement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between site EUI and source EUI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Site EUI measures energy consumed at the building itself, expressed in kBtu per square foot per year based on metered utility data. Source EUI accounts for the full energy chain including generation and transmission losses — electricity has a higher source-to-site ratio than natural gas. ENERGY STAR Portfolio Manager uses source EUI for its 1–100 scoring system. Most building performance standards, including Washington's CBPS and Oregon's BPS, use site EUI for compliance targets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do building performance standards use EUI or emissions intensity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the jurisdiction. Washington State's Clean Buildings Performance Standard (CBPS), Oregon's Building Performance Standard, and Colorado's BPS all set compliance thresholds based on site EUI by building type. New York City's Local Law 97 and Boston's BERDO use greenhouse gas emissions intensity (kg CO2e per square foot) as the primary metric. Both approaches ultimately push buildings toward energy efficiency and electrification, but the measurement framework differs."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary: #1B4332;
+  --primary-light: #2D6A4F;
+  --accent: #D4A017;
+  --accent-hover: #b8880f;
+  --secondary: #40916C;
+  --tint: #D8F3DC;
+  --cream: #F5F1EB;
+  --navy: #1E293B;
+  --bg: #FAFAF7;
+  --bg-alt: var(--cream);
+  --card-bg: #ffffff;
+  --card-border: #E8E4DD;
+  --card-shadow-hover: 0 8px 32px rgba(27,67,50,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  --text: #1E293B;
+  --text-secondary: #4A5568;
+  --text-muted: #718096;
+  --border: #E8E4DD;
+  --white: #ffffff;
+  --overlay: rgba(10,31,18,0.6);
+  --nav-bg: rgba(250,250,247,0.9);
+  --input-bg: #ffffff;
+  --input-border: #D1CCC4;
+  --font-heading: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --radius: 6px;
+  --radius-sm: 4px;
+  --radius-lg: 8px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --max-width: 1200px;
+  --footer-dark: #0D2818;
+}
+
+html.dark {
+  --primary: #2D6A4F;
+  --primary-light: #40916C;
+  --bg: #0A1F12;
+  --bg-alt: #0F2918;
+  --card-bg: #132A1B;
+  --card-border: rgba(45,106,79,0.25);
+  --card-shadow-hover: 0 8px 32px rgba(0,0,0,0.4);
+  --text: #E2E8F0;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --navy: #E2E8F0;
+  --border: #1E3A28;
+  --white: #0A1F12;
+  --nav-bg: rgba(10,31,18,0.92);
+  --overlay: rgba(5,15,9,0.8);
+  --input-bg: #162E1F;
+  --input-border: #2D5A42;
+  --tint: #162E1F;
+  --cream: #0F2918;
+  --footer-dark: #061A0D;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  color: var(--navy);
+  font-weight: 400;
+}
+
+html.dark h1, html.dark h2, html.dark h3,
+html.dark h4, html.dark h5, html.dark h6 {
+  color: var(--text);
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; border: none; background: none; font-family: var(--font-body); }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.content-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.wide-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================================
+   SECTION LABELS
+   ============================================================ */
+.section-label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+
+.text-center { text-align: center; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition);
+  letter-spacing: 0.3px;
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #1a1a00;
+  border-color: var(--accent);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: scale(1.02);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-outline-white {
+  background: transparent;
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.3);
+}
+.btn-outline-white:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+html.dark .btn-outline {
+  border-color: var(--input-border);
+  color: var(--text);
+}
+html.dark .btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-sm {
+  padding: 9px 20px;
+  font-size: 0.82rem;
+}
+
+/* ============================================================
+   SCROLL ANIMATIONS
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+/* ============================================================
+   HEADER / NAV
+   ============================================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 18px 0;
+  transition: all var(--transition);
+  background: transparent;
+}
+
+.site-header.scrolled {
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header:not(.scrolled) .logo-text { color: #ffffff; }
+.site-header:not(.scrolled) .logo-suffix { color: rgba(255,255,255,0.6); }
+.site-header:not(.scrolled) .nav-links a { color: rgba(255,255,255,0.7); }
+.site-header:not(.scrolled) .nav-links a:hover { color: var(--accent); }
+.site-header:not(.scrolled) .hamburger span { background: #ffffff; }
+.site-header:not(.scrolled) .dark-toggle-icon { color: rgba(255,255,255,0.7); }
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--primary);
+  transition: color var(--transition);
+}
+html.dark .logo-text { color: #95D5B2; }
+
+.logo-suffix {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition);
+  position: relative;
+  white-space: nowrap;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--accent);
+  transition: width var(--transition);
+}
+.nav-links a:hover { color: var(--primary); }
+.nav-links a:hover::after { width: 100%; }
+html.dark .nav-links a:hover { color: var(--accent); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dark-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dark-toggle-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: var(--border);
+  border-radius: 12px;
+  transition: background var(--transition);
+  cursor: pointer;
+}
+.dark-toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform var(--transition), background var(--transition);
+}
+html.dark .dark-toggle-switch { background: var(--secondary); }
+html.dark .dark-toggle-switch::after {
+  transform: translateX(20px);
+  background: var(--accent);
+}
+
+.dark-toggle-icon {
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  z-index: 1002;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.mobile-nav.open { opacity: 1; }
+.mobile-nav-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(320px, 85vw);
+  height: 100%;
+  background: var(--card-bg);
+  padding: 80px 32px 32px;
+  transform: translateX(100%);
+  transition: transform var(--transition);
+  overflow-y: auto;
+}
+.mobile-nav.open .mobile-nav-panel { transform: translateX(0); }
+.mobile-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mobile-nav-links a {
+  display: block;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition);
+}
+.mobile-nav-links a:hover { color: var(--accent); }
+.mobile-nav .btn { width: 100%; margin-top: 24px; text-align: center; }
+
+@media (max-width: 1120px) {
+  .nav-links, .nav-right .btn, .nav-right .dark-toggle { display: none; }
+  .hamburger { display: flex; }
+  .mobile-nav { display: block; pointer-events: none; }
+  .mobile-nav.open { pointer-events: all; }
+}
+
+/* ============================================================
+   PAGE HERO
+   ============================================================ */
+.page-hero {
+  background: #1B4332;
+  color: #ffffff;
+  padding: 140px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+html.dark .page-hero { background: #0A1F12; }
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: -5%;
+  width: 50%;
+  height: 70%;
+  background: radial-gradient(ellipse, rgba(45,106,79,0.18), transparent 70%);
+  pointer-events: none;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.page-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.breadcrumb a,
+.breadcrumb span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  transition: color var(--transition);
+}
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb .sep { color: rgba(255,255,255,0.3); font-size: 0.75rem; }
+.breadcrumb .current { color: rgba(255,255,255,0.7); }
+
+.page-hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.page-hero-sub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.75;
+  margin-bottom: 36px;
+  max-width: 720px;
+  font-weight: 300;
+}
+
+.hero-bottom-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+@media (max-width: 768px) {
+  .page-hero { padding: 110px 0 60px; }
+}
+
+/* ============================================================
+   ARTICLE SECTIONS
+   ============================================================ */
+.article-section {
+  padding: 80px 0;
+  background: var(--bg);
+}
+.article-section.alt-bg {
+  background: var(--bg-alt);
+}
+
+/* ============================================================
+   PROSE
+   ============================================================ */
+.prose {
+  max-width: 800px;
+}
+.prose p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+html.dark .prose p { color: var(--text-secondary); }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--text); font-weight: 600; }
+html.dark .prose strong { color: var(--text); }
+.prose a {
+  color: var(--secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+html.dark .prose a { color: #6EE7B7; }
+
+/* ============================================================
+   EUI BENCHMARK TABLE
+   ============================================================ */
+.table-wrap {
+  overflow-x: auto;
+  margin: 40px 0 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgba(27,67,50,0.06);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.925rem;
+}
+
+thead {
+  background: var(--primary);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+thead th {
+  padding: 16px 20px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+}
+
+thead th:not(:first-child) {
+  text-align: center;
+}
+
+html.dark thead {
+  background: #0F3322;
+}
+
+tbody tr {
+  transition: background var(--transition);
+}
+
+tbody tr:nth-child(odd) {
+  background: var(--card-bg);
+}
+tbody tr:nth-child(even) {
+  background: var(--tint);
+}
+html.dark tbody tr:nth-child(even) {
+  background: rgba(45,106,79,0.08);
+}
+
+tbody tr:hover {
+  background: rgba(212,160,23,0.07);
+}
+html.dark tbody tr:hover {
+  background: rgba(212,160,23,0.06);
+}
+
+tbody td {
+  padding: 15px 20px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  line-height: 1.5;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+td:not(:first-child) {
+  text-align: center;
+}
+
+td:first-child {
+  font-weight: 500;
+}
+
+.eui-value {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--primary);
+  font-family: var(--font-heading);
+}
+html.dark .eui-value { color: #6EE7B7; }
+
+.eui-value.target {
+  color: var(--accent);
+}
+html.dark .eui-value.target { color: var(--accent); }
+
+.eui-na {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.table-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  padding: 0 4px;
+  line-height: 1.6;
+}
+
+.col-notes {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: left !important;
+}
+
+/* Column width hints */
+thead th:first-child { min-width: 200px; }
+thead th:nth-child(2),
+thead th:nth-child(3),
+thead th:nth-child(4) { min-width: 140px; }
+thead th:last-child { min-width: 220px; }
+
+@media (max-width: 768px) {
+  .table-wrap {
+    margin: 32px -24px 16px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  .article-section { padding: 60px 0; }
+}
+
+/* ============================================================
+   INFO BOX
+   ============================================================ */
+.info-box {
+  background: var(--tint);
+  border: 1px solid rgba(27,67,50,0.12);
+  border-left: 4px solid var(--secondary);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin: 32px 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+html.dark .info-box {
+  background: rgba(45,106,79,0.1);
+  border-color: rgba(45,106,79,0.2);
+  border-left-color: var(--secondary);
+}
+.info-box strong { color: var(--primary); }
+html.dark .info-box strong { color: #95D5B2; }
+.info-box a {
+  color: var(--secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+html.dark .info-box a { color: #6EE7B7; }
+
+/* ============================================================
+   JURISDICTION LIST
+   ============================================================ */
+.jurisdiction-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.jurisdiction-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px 22px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.jurisdiction-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.jurisdiction-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.tag-eui {
+  background: rgba(27,67,50,0.08);
+  color: var(--primary);
+  border: 1px solid rgba(27,67,50,0.15);
+}
+html.dark .tag-eui { background: rgba(45,106,79,0.15); color: #95D5B2; border-color: rgba(45,106,79,0.25); }
+
+.tag-emissions {
+  background: rgba(212,160,23,0.1);
+  color: #8a6500;
+  border: 1px solid rgba(212,160,23,0.25);
+}
+html.dark .tag-emissions { background: rgba(212,160,23,0.08); color: var(--accent); border-color: rgba(212,160,23,0.2); }
+
+.jurisdiction-card h3 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.jurisdiction-card p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.jurisdiction-card a {
+  color: var(--secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+html.dark .jurisdiction-card a { color: #6EE7B7; }
+
+/* ============================================================
+   STEPS
+   ============================================================ */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 40px;
+  position: relative;
+}
+
+.steps-list::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.step-item {
+  display: flex;
+  gap: 24px;
+  padding-bottom: 36px;
+  position: relative;
+}
+.step-item:last-child { padding-bottom: 0; }
+
+.step-number {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.step-content { flex: 1; padding-top: 10px; }
+
+.step-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.step-content p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.step-content code {
+  display: inline-block;
+  background: var(--tint);
+  border: 1px solid rgba(27,67,50,0.12);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--primary);
+  margin: 8px 0;
+}
+html.dark .step-content code {
+  background: rgba(45,106,79,0.15);
+  border-color: rgba(45,106,79,0.25);
+  color: #95D5B2;
+}
+
+/* ============================================================
+   SERVICE HIGHLIGHTS
+   ============================================================ */
+.service-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin: 36px 0;
+}
+
+.highlight-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.highlight-item:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.highlight-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.highlight-text h3 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.highlight-text p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.faq-item:last-child { border-bottom: none; }
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 28px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  background: none;
+  border: none;
+}
+.faq-question:hover { background: var(--tint); color: var(--primary); }
+html.dark .faq-question:hover { background: rgba(45,106,79,0.1); color: #95D5B2; }
+
+.faq-chevron {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform var(--transition);
+}
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+.faq-answer {
+  display: none;
+  padding: 0 28px 22px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+.faq-item.open .faq-answer { display: block; }
+
+/* ============================================================
+   CTA SECTION
+   ============================================================ */
+.cta-section {
+  background: #1B4332;
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+html.dark .cta-section { background: #0A1F12; }
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -5%;
+  width: 50%;
+  height: 160%;
+  background: radial-gradient(ellipse, rgba(45,106,79,0.15), transparent 70%);
+  pointer-events: none;
+}
+
+.cta-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.cta-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.cta-section .section-label { color: var(--accent); }
+
+.cta-section h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.cta-section p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.6);
+  max-width: 560px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-reassurance {
+  margin-top: 24px;
+  font-size: 0.825rem;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--footer-dark);
+  color: rgba(255,255,255,0.6);
+  padding: 72px 0 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand .logo-text { color: #95D5B2; }
+.footer-brand .logo-suffix { color: rgba(255,255,255,0.3); }
+
+.footer-tagline {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 14px;
+  line-height: 1.7;
+  max-width: 260px;
+}
+
+.footer-cem-badge {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.footer-heading {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+  transition: color var(--transition);
+  line-height: 1.5;
+}
+.footer-links a:hover { color: var(--accent); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.footer-copyright {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.25);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 16px;
+}
+.footer-socials a {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.3);
+  transition: color var(--transition);
+}
+.footer-socials a:hover { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="nav-inner">
+    <a href="../../" class="logo">
+      <span class="logo-text">Green Check</span><span class="logo-suffix">Solutions</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="../../#services">Services</a></li>
+        <li><a href="../../#compliance">Compliance</a></li>
+        <li><a href="../../#how-it-works">How It Works</a></li>
+        <li><a href="../../#about">Our Expertise</a></li>
+        <li><a href="../../#faq">FAQ</a></li>
+        <li><a href="../../#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="dark-toggle">
+        <span class="dark-toggle-icon" id="darkIcon">&#9790;</span>
+        <button class="dark-toggle-switch" id="darkToggle" aria-label="Toggle dark mode"></button>
+      </div>
+      <a href="../../#contact" class="btn btn-primary btn-sm">Free Assessment</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-panel">
+    <ul class="mobile-nav-links">
+      <li><a href="../../#services" data-mobile-close>Services</a></li>
+      <li><a href="../../#compliance" data-mobile-close>Compliance</a></li>
+      <li><a href="../../#how-it-works" data-mobile-close>How It Works</a></li>
+      <li><a href="../../#about" data-mobile-close>Our Expertise</a></li>
+      <li><a href="../../#faq" data-mobile-close>FAQ</a></li>
+      <li><a href="../../#contact" data-mobile-close>Contact</a></li>
+    </ul>
+    <a href="../../#contact" class="btn btn-primary" data-mobile-close>Get a Free Assessment</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../">Home</a>
+        <span class="sep">&#8250;</span>
+        <a href="../../resources/">Resources</a>
+        <span class="sep">&#8250;</span>
+        <span class="current">EUI Benchmarks</span>
+      </nav>
+
+      <h1>Energy Use Intensity Benchmarks by Building Type</h1>
+
+      <p class="page-hero-sub">
+        EUI is the primary metric used in building performance standards across the US. Use this reference to see how your building compares &mdash; and what you need to achieve for compliance.
+      </p>
+    </div>
+  </div>
+  <div class="hero-bottom-line"></div>
+</section>
+
+<!-- SECTION 1: WHAT IS EUI -->
+<section class="article-section" id="what-is-eui">
+  <div class="content-container">
+    <div class="reveal">
+      <span class="section-label">The Basics</span>
+      <h2 class="section-title">What Is Energy Use Intensity (EUI)?</h2>
+    </div>
+
+    <div class="prose reveal reveal-delay-1">
+      <p>
+        Energy Use Intensity (EUI) is the standard measure of a building's annual energy consumption per unit of floor area. It is calculated by dividing a building's total energy use for a full calendar year &mdash; including electricity, natural gas, steam, and all other energy sources &mdash; by its gross floor area in square feet. The result is expressed in <strong>kBtu per square foot per year (kBtu/SF/yr)</strong>. A lower EUI indicates a more energy-efficient building. EUI enables meaningful comparisons across buildings of different sizes and is the primary metric used by ENERGY STAR Portfolio Manager and virtually every state-level building performance standard enacted to date.
+      </p>
+      <p>
+        It is important to understand the distinction between <strong>site EUI</strong> and <strong>source EUI</strong>. Site EUI measures only the energy delivered to and consumed at the building itself, based on metered utility bills. Source EUI accounts for the full energy chain: upstream generation, transmission, and distribution losses are factored in using national average conversion factors. Because generating electricity involves significant losses before it reaches a building, electricity has a much higher source-to-site ratio than natural gas. ENERGY STAR Portfolio Manager uses source EUI to calculate its 1&ndash;100 score, making that score comparable across buildings with different fuel mixes. Most state building performance standards &mdash; including Washington's Clean Buildings Performance Standard, Oregon's BPS, and Colorado's BPS &mdash; use <strong>site EUI</strong> as the compliance threshold, so the values in the table below reflect site EUI unless otherwise noted.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: BENCHMARK TABLE -->
+<section class="article-section alt-bg" id="benchmark-table">
+  <div class="wide-container">
+    <div class="reveal">
+      <span class="section-label">Reference Data</span>
+      <h2 class="section-title">EUI Benchmarks by Building Type</h2>
+      <p class="section-subtitle">
+        Compare your building's current EUI against national median performance, ENERGY STAR targets, and Washington State CBPS compliance thresholds. All values are site EUI in kBtu/SF/yr.
+      </p>
+    </div>
+
+    <div class="table-wrap reveal reveal-delay-1">
+      <table>
+        <thead>
+          <tr>
+            <th>Building Type</th>
+            <th>Median US EUI</th>
+            <th>ENERGY STAR Score 50 EUI</th>
+            <th>WA CBPS Target EUI</th>
+            <th class="col-notes" style="text-align:left;">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Office</td>
+            <td><span class="eui-value">78</span></td>
+            <td><span class="eui-value">65</span></td>
+            <td><span class="eui-value target">50</span></td>
+            <td class="col-notes">Target is challenging for older stock; HVAC and lighting upgrades typically close the gap</td>
+          </tr>
+          <tr>
+            <td>Retail Store</td>
+            <td><span class="eui-value">74</span></td>
+            <td><span class="eui-value">57</span></td>
+            <td><span class="eui-value target">53</span></td>
+            <td class="col-notes">Highly variable by hours of operation; extended-hour stores carry higher baseline EUI</td>
+          </tr>
+          <tr>
+            <td>K&ndash;12 School</td>
+            <td><span class="eui-value">72</span></td>
+            <td><span class="eui-value">59</span></td>
+            <td><span class="eui-value target">49</span></td>
+            <td class="col-notes">HVAC scheduling and setback controls are critical; many schools can comply with operational changes alone</td>
+          </tr>
+          <tr>
+            <td>Multifamily (5+ units)</td>
+            <td><span class="eui-value">62</span></td>
+            <td><span class="eui-value">52</span></td>
+            <td><span class="eui-value target">45</span></td>
+            <td class="col-notes">Includes tenant unit energy; whole-building metering required for accurate benchmarking</td>
+          </tr>
+          <tr>
+            <td>Warehouse (unrefrigerated)</td>
+            <td><span class="eui-value">35</span></td>
+            <td><span class="eui-value">25</span></td>
+            <td><span class="eui-value target">24</span></td>
+            <td class="col-notes">Generally easier to achieve; lighting upgrades alone often sufficient for compliance</td>
+          </tr>
+          <tr>
+            <td>Hospital / Acute Care</td>
+            <td><span class="eui-value">385</span></td>
+            <td><span class="eui-value">325</span></td>
+            <td><span class="eui-value target">250</span></td>
+            <td class="col-notes">High intensity by nature due to 24/7 operations, ventilation requirements, and medical equipment loads</td>
+          </tr>
+          <tr>
+            <td>Hotel / Motel</td>
+            <td><span class="eui-value">120</span></td>
+            <td><span class="eui-value">95</span></td>
+            <td><span class="eui-value target">68</span></td>
+            <td class="col-notes">Occupancy-dependent; gap analysis should account for ADR and seasonal usage patterns</td>
+          </tr>
+          <tr>
+            <td>College / University</td>
+            <td><span class="eui-value">130</span></td>
+            <td><span class="eui-value">105</span></td>
+            <td><span class="eui-value target">85</span></td>
+            <td class="col-notes">Varies significantly by research intensity; lab-heavy campuses will have higher baseline EUI</td>
+          </tr>
+          <tr>
+            <td>Data Center</td>
+            <td><span class="eui-value">600+</span></td>
+            <td><span class="eui-na">N/A</span></td>
+            <td><span class="eui-na">N/A</span></td>
+            <td class="col-notes">Excluded from most BPS programs due to the unique nature of IT loads; PUE is the standard metric</td>
+          </tr>
+          <tr>
+            <td>Grocery / Food Sales</td>
+            <td><span class="eui-value">450</span></td>
+            <td><span class="eui-value">380</span></td>
+            <td><span class="eui-na">N/A</span></td>
+            <td class="col-notes">Refrigeration loads dominate; typically excluded from or given extended timelines under BPS programs</td>
+          </tr>
+          <tr>
+            <td>Medical Office</td>
+            <td><span class="eui-value">95</span></td>
+            <td><span class="eui-value">78</span></td>
+            <td><span class="eui-value target">60</span></td>
+            <td class="col-notes">HVAC and medical equipment intensive; plug load management and scheduling are key levers</td>
+          </tr>
+          <tr>
+            <td>Worship Facility</td>
+            <td><span class="eui-value">45</span></td>
+            <td><span class="eui-value">38</span></td>
+            <td><span class="eui-na">N/A</span></td>
+            <td class="col-notes">Low occupancy hours result in naturally low EUI; most houses of worship fall below BPS size thresholds</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="table-note reveal reveal-delay-2">
+      Values are representative benchmarks based on CBECS national survey data, ENERGY STAR Portfolio Manager reference values, and published WA CBPS targets. Actual compliance thresholds vary by jurisdiction, methodology, and building-specific characteristics. Verify current targets with the applicable state agency before making compliance decisions.
+    </p>
+
+    <div class="info-box reveal reveal-delay-3">
+      <strong>How to read this table:</strong> The Median US EUI column shows where the typical US building of that type currently performs. The ENERGY STAR Score 50 EUI is roughly the threshold for an average ENERGY STAR score (the 50th percentile on a source-EUI basis). The WA CBPS Target EUI is the maximum site EUI your building must achieve to comply with Washington's Clean Buildings Performance Standard. If your building's EUI is above the WA target, you have a compliance gap. <a href="../../#contact">Contact us</a> for a gap analysis.
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: HOW EUI IS USED IN COMPLIANCE -->
+<section class="article-section" id="eui-in-compliance">
+  <div class="content-container">
+    <div class="reveal">
+      <span class="section-label">Compliance Context</span>
+      <h2 class="section-title">How EUI Is Used in Building Performance Standards</h2>
+    </div>
+
+    <div class="prose reveal reveal-delay-1">
+      <p>
+        Building performance standards (BPS) are laws that require existing commercial buildings to meet minimum energy performance thresholds by a specified deadline, with financial penalties for non-compliance. EUI-based BPS programs set a maximum allowable site EUI for each building type and require owners to demonstrate, through annual benchmarking data submitted to a state agency, that their building meets or beats the target. If the building exceeds the EUI threshold, the owner must undertake energy efficiency improvements and resubmit data showing compliance.
+      </p>
+      <p>
+        Not all BPS programs use EUI as the primary metric. New York City's Local Law 97 (LL97) and Boston's BERDO set limits in terms of <strong>greenhouse gas emissions intensity</strong> (kg CO&#8322;e per square foot), which places additional emphasis on fuel switching from gas to electricity as the grid decarbonizes. However, EUI remains the most widely adopted compliance metric in the US, and even emissions-based programs ultimately reward the same outcome: reduced energy consumption and improved building efficiency.
+      </p>
+    </div>
+
+    <div class="jurisdiction-grid reveal reveal-delay-2">
+      <div class="jurisdiction-card">
+        <span class="jurisdiction-tag tag-eui">EUI-Based</span>
+        <h3>Washington State CBPS</h3>
+        <p>Site EUI targets by building type. Deadlines: Tier 1 (&gt;220k SF) June 2026, Tier 2 June 2027, Tier 3 June 2028. <a href="../../compliance/washington-clean-buildings-act/">Full compliance guide &rarr;</a></p>
+      </div>
+      <div class="jurisdiction-card">
+        <span class="jurisdiction-tag tag-eui">EUI-Based</span>
+        <h3>Oregon Building Performance Standard</h3>
+        <p>Site EUI targets modeled on ENERGY STAR reference values. Phased deadlines beginning 2023 for large buildings, with ongoing compliance cycles.</p>
+      </div>
+      <div class="jurisdiction-card">
+        <span class="jurisdiction-tag tag-eui">EUI-Based</span>
+        <h3>Colorado Building Performance Standard</h3>
+        <p>Applies to buildings over 50,000 SF in jurisdictions that opt in. EUI targets vary by building type; first performance period ends 2026.</p>
+      </div>
+      <div class="jurisdiction-card">
+        <span class="jurisdiction-tag tag-emissions">Emissions-Based</span>
+        <h3>NYC Local Law 97</h3>
+        <p>GHG intensity limits (tCO&#8322;e/SF) that tighten in 2030 and again in 2035. Applies to buildings over 25,000 SF. Penalties up to $268/tCO&#8322;e above limit.</p>
+      </div>
+      <div class="jurisdiction-card">
+        <span class="jurisdiction-tag tag-emissions">Emissions-Based</span>
+        <h3>Boston BERDO</h3>
+        <p>Emissions intensity targets with five-year compliance cycles beginning 2025. Applies to buildings over 20,000 SF in Boston.</p>
+      </div>
+      <div class="jurisdiction-card">
+        <span class="jurisdiction-tag tag-eui">EUI-Based</span>
+        <h3>More Jurisdictions</h3>
+        <p>Illinois, Maryland, and several additional states have enacted or proposed BPS legislation. EUI benchmarking is the foundation for all of them. <a href="../../resources/bps-deadline-tracker/">See the BPS deadline tracker &rarr;</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: HOW TO CALCULATE EUI -->
+<section class="article-section alt-bg" id="calculate-eui">
+  <div class="content-container">
+    <div class="reveal">
+      <span class="section-label">Step-by-Step</span>
+      <h2 class="section-title">How to Calculate Your Building's EUI</h2>
+      <p class="section-subtitle">
+        You can calculate a rough site EUI for any building using 12 months of utility bills and a basic understanding of your building area. Follow these three steps.
+      </p>
+    </div>
+
+    <div class="steps-list reveal reveal-delay-1">
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Total all energy consumption for 12 consecutive months</h3>
+          <p>
+            Gather 12 months of utility bills for every fuel source your building uses: electricity (kWh), natural gas (therms or CCF), steam (Mlb or kBtu), fuel oil (gallons), and any other source. Convert each to kBtu using standard conversion factors:
+          </p>
+          <code>1 kWh = 3.412 kBtu</code>
+          <code>1 therm = 100 kBtu</code>
+          <code>1 CCF natural gas &asymp; 102 kBtu</code>
+          <p style="margin-top:10px;">
+            Sum all converted values to get your building's total annual energy consumption in kBtu. Include all meters serving the building, including tenant submeters if you have access to that data.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Divide by gross floor area in square feet</h3>
+          <p>
+            Use your building's gross floor area as recorded in your lease, tax records, or architectural drawings. Gross floor area includes all conditioned and unconditioned interior spaces measured to the exterior face of the building envelope. Divide your total annual kBtu by this number:
+          </p>
+          <code>Site EUI = Total Annual Energy (kBtu) &divide; Gross Floor Area (SF)</code>
+          <p style="margin-top:10px;">
+            The result is your building's site EUI in kBtu/SF/yr. For ENERGY STAR Portfolio Manager, you will enter raw consumption data and the tool performs this calculation automatically, reporting both site and source EUI.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Compare to the benchmark table and your jurisdiction's compliance target</h3>
+          <p>
+            Locate your building type in the table above. Compare your calculated site EUI to the Median US EUI column to understand where you stand relative to peers. Then compare to your applicable jurisdiction's target column. If your EUI exceeds the compliance target, the difference is your <strong>compliance gap</strong> &mdash; the amount of energy reduction needed to meet the standard. A gap analysis will identify the most cost-effective combination of measures to close that gap before your deadline.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box reveal reveal-delay-2">
+      <strong>Use ENERGY STAR Portfolio Manager for official benchmarking.</strong> Most BPS programs require that compliance data be submitted through Portfolio Manager, which applies weather normalization and methodology adjustments that a manual calculation does not. The steps above are useful for a quick estimate; Portfolio Manager is required for formal reporting. <a href="../../services/energy-benchmarking/">See our benchmarking service &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: HOW GCS CAN HELP -->
+<section class="article-section" id="how-we-help">
+  <div class="content-container">
+    <div class="reveal">
+      <span class="section-label">Our Services</span>
+      <h2 class="section-title">How Green Check Solutions Can Help</h2>
+      <p class="section-subtitle">
+        Knowing your EUI is step one. Getting it to where it needs to be &mdash; on time and cost-effectively &mdash; is where we come in.
+      </p>
+    </div>
+
+    <div class="service-highlights reveal reveal-delay-1">
+      <div class="highlight-item">
+        <div class="highlight-icon">&#128203;</div>
+        <div class="highlight-text">
+          <h3>Portfolio Manager Setup &amp; Benchmarking</h3>
+          <p>We set up or audit your ENERGY STAR Portfolio Manager account, ensure all meters and building attributes are entered correctly, and produce your official site and source EUI. Most building owners have errors in their Portfolio Manager data that inflate their apparent EUI or cause compliance reports to fail verification.</p>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-icon">&#128200;</div>
+        <div class="highlight-text">
+          <h3>EUI Gap Analysis</h3>
+          <p>Once we have accurate benchmarking data, we identify where your building's energy is going and which systems are underperforming relative to their potential. We quantify the EUI gap and model the expected reduction from each candidate measure, so you can make capital allocation decisions with confidence.</p>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-icon">&#9989;</div>
+        <div class="highlight-text">
+          <h3>Compliance Strategy &amp; Reporting</h3>
+          <p>We develop a sequenced compliance plan that fits your timeline and budget, prepare all required state agency submissions, and provide ongoing support through your compliance deadline. If your building is in Washington, Oregon, or another BPS state, we handle the regulatory interface so you don't have to.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose reveal reveal-delay-2" style="margin-top: 12px;">
+      <p>
+        John Slagboom, CEM, has worked with commercial building portfolios ranging from single-asset owners to multi-state property managers. Whether your building is well below its EUI target or significantly above it, the right starting point is accurate benchmarking and an honest gap analysis. <a href="../../services/energy-benchmarking/">Learn about our benchmarking service</a> or <a href="../../compliance/washington-clean-buildings-act/">review Washington CBPS compliance requirements</a> if you own buildings in the state.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: FAQ -->
+<section class="article-section alt-bg" id="faq">
+  <div class="content-container">
+    <div class="reveal">
+      <span class="section-label">Common Questions</span>
+      <h2 class="section-title">EUI Benchmarking FAQ</h2>
+    </div>
+
+    <div class="faq-list reveal reveal-delay-1">
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is a good EUI score for an office building?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="5 8 10 13 15 8"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          The median US office EUI is approximately 78 kBtu/SF/yr, meaning half of US offices perform below that number. An ENERGY STAR score of 50 &mdash; the threshold for average performance &mdash; corresponds to roughly 65 kBtu/SF/yr on a source EUI basis. Washington's CBPS compliance target for offices is 50 kBtu/SF/yr (site EUI). Generally: below 50 is excellent, 50&ndash;65 is good, 65&ndash;80 is average, and above 80 warrants targeted improvement.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the difference between site EUI and source EUI?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="5 8 10 13 15 8"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          Site EUI measures the energy consumed at the building as recorded by utility meters. Source EUI accounts for the upstream losses in generating and delivering that energy &mdash; electricity has a much higher source-to-site ratio than natural gas because of power plant and transmission losses. ENERGY STAR Portfolio Manager uses source EUI for its 1&ndash;100 scoring system. Most state BPS programs, including Washington's CBPS, use site EUI as the compliance threshold. When comparing your building against the table on this page, use site EUI figures from your Portfolio Manager report.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do building performance standards use EUI or emissions intensity?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="5 8 10 13 15 8"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          It depends on the jurisdiction. Washington State CBPS, Oregon BPS, and Colorado BPS all use site EUI targets by building type. New York City's Local Law 97 and Boston's BERDO use greenhouse gas emissions intensity (kg CO&#8322;e/SF) as the primary compliance metric. Both approaches push buildings toward efficiency and electrification, but the measurement framework differs. If you own buildings in multiple states, verify the metric and methodology for each applicable law.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <span class="section-label">Get Started</span>
+      <h2>Get Your Building's EUI Calculated</h2>
+      <p>We handle Portfolio Manager setup, EUI calculation, and gap analysis. Know where you stand &mdash; and exactly what it takes to comply.</p>
+      <div class="cta-buttons">
+        <a href="../../#contact" class="btn btn-primary">Request a Free Assessment</a>
+        <a href="../../services/energy-benchmarking/" class="btn btn-outline-white">See Our Benchmarking Service</a>
+      </div>
+      <p class="cta-reassurance">No commitment required. Response within one business day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../../" class="logo">
+          <span class="logo-text">Green Check</span><span class="logo-suffix">Solutions</span>
+        </a>
+        <p class="footer-tagline">Know the law. Meet the deadline. Avoid the penalty.</p>
+        <span class="footer-cem-badge">JOHN SLAGBOOM, CEM, MBA</span>
+      </div>
+      <div>
+        <p class="footer-heading">Services</p>
+        <ul class="footer-links">
+          <li><a href="../../services/energy-benchmarking/">Energy Benchmarking</a></li>
+          <li><a href="../../services/utility-bill-auditing/">Utility Bill Auditing</a></li>
+          <li><a href="../../#services">All Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-heading">Compliance</p>
+        <ul class="footer-links">
+          <li><a href="../../compliance/washington-clean-buildings-act/">Washington CBPS</a></li>
+          <li><a href="../../#compliance">All Jurisdictions</a></li>
+          <li><a href="../../resources/bps-deadline-tracker/">Deadline Tracker</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-heading">Resources</p>
+        <ul class="footer-links">
+          <li><a href="../../resources/eui-benchmarks/">EUI Benchmarks</a></li>
+          <li><a href="../../resources/bps-deadline-tracker/">BPS Deadline Tracker</a></li>
+          <li><a href="../../#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2026 Green Check Solutions LLC &bull; info@greenchecksolutions.com &bull; www.greenchecksolutions.com</p>
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/company/green-check-solutions" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+(function () {
+  const html = document.documentElement;
+  const saved = localStorage.getItem('gcs-dark');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'true' || (saved === null && prefersDark)) {
+    html.classList.add('dark');
+  }
+})();
+
+document.addEventListener('DOMContentLoaded', function () {
+  const html = document.documentElement;
+  const toggle = document.getElementById('darkToggle');
+  const icon = document.getElementById('darkIcon');
+
+  function updateIcon() {
+    icon.textContent = html.classList.contains('dark') ? '\u2600' : '\u263E';
+  }
+  updateIcon();
+
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      html.classList.toggle('dark');
+      localStorage.setItem('gcs-dark', html.classList.contains('dark'));
+      updateIcon();
+    });
+  }
+
+  /* ============================================================
+     HEADER SCROLL
+     ============================================================ */
+  const header = document.getElementById('siteHeader');
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 30);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ============================================================
+     MOBILE NAV
+     ============================================================ */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+
+  function openMenu() {
+    hamburger.classList.add('active');
+    mobileNav.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    mobileNav.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openMenu);
+
+  if (mobileNav) {
+    mobileNav.addEventListener('click', function (e) {
+      if (e.target === mobileNav) closeMenu();
+    });
+    mobileNav.querySelectorAll('[data-mobile-close]').forEach(function (el) {
+      el.addEventListener('click', closeMenu);
+    });
+  }
+
+  /* ============================================================
+     SCROLL REVEAL
+     ============================================================ */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(function (el) { observer.observe(el); });
+
+  /* ============================================================
+     FAQ ACCORDION
+     ============================================================ */
+  document.querySelectorAll('.faq-question').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function (i) {
+        i.classList.remove('open');
+        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
