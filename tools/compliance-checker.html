@@ -942,11 +942,11 @@
           Download Your Compliance Report
         </h3>
         <p style="font-size:.875rem;color:var(--text-light);margin-bottom:1.25rem;">
-          Get a CSV summary of all applicable laws and deadlines for your records — and let our team help you take the next step.
+          Download a formal one-page compliance assessment report for your records — ready to print or save as PDF.
         </p>
         <div style="display:flex;gap:.875rem;flex-wrap:wrap;align-items:center;">
-          <button class="btn btn-primary" onclick="downloadCSV()" id="download-btn">
-            &#11015; Download CSV Report
+          <button class="btn btn-primary" onclick="downloadReport()" id="download-btn">
+            &#11015; Download Report (PDF)
           </button>
         </div>
 
@@ -1694,45 +1694,193 @@
   }
 
   /* =============================================
-     CSV DOWNLOAD
+     PDF REPORT DOWNLOAD
   ============================================= */
-  function downloadCSV() {
-    const lead = JSON.parse(sessionStorage.getItem('gcs_lead') || '{}');
-    const rows = [
-      ['Email','State','City','Square Footage','Building Type','Year Built','Applicable Laws','Timestamp'],
-      [
-        lead.email || '',
-        lead.state || '',
-        lead.city  || '',
-        lead.sf    || '',
-        lead.buildingType || '',
-        lead.yearBuilt    || '',
-        (lead.laws || []).join('; '),
-        lead.timestamp    || new Date().toISOString()
-      ]
-    ];
-    // Add law details rows
-    rows.push([]);
-    rows.push(['Law ID','Law Name','Bill Number','Deadline','Urgency','Penalty Formula']);
-    (applicableLaws || []).forEach(l => {
+  function downloadReport() {
+    const sf = currentData.sf || 0;
+    const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const stateName = stateSelect.options[stateSelect.selectedIndex]
+      ? stateSelect.options[stateSelect.selectedIndex].text
+      : (currentData.state || '');
+
+    // Build law rows
+    let rowIdx = 0;
+    const lawRowsHtml = (applicableLaws || []).map(l => {
       let penalty = '';
-      try { penalty = l.penaltyFormula(currentData.sf || 0); } catch(e) {}
-      rows.push([l.id, l.name, l.billNumber, l.deadlineText, l.deadlineUrgent ? 'URGENT' : 'Standard', penalty]);
-    });
+      try { penalty = l.penaltyFormula(sf); } catch(e) { penalty = 'See notes'; }
+      const reqItems = (l.requirements || []).map(r => `<li>${r}</li>`).join('');
+      const urgentTag = l.deadlineUrgent
+        ? '<span class="urgent-tag">URGENT</span>' : '';
+      const rowClass = (rowIdx % 2 === 1) ? ' class="even-row"' : '';
+      rowIdx++;
+      const noteRow = l.notes
+        ? `<tr class="note-row"><td colspan="4"><strong>Note:</strong> ${l.notes}</td></tr>`
+        : '';
+      return `
+        <tr${rowClass}>
+          <td><strong>${l.name}</strong><br/><span class="bill-num">${l.billNumber}</span></td>
+          <td>${l.deadlineText}${urgentTag ? ' ' + urgentTag : ''}</td>
+          <td class="penalty-cell">${penalty}</td>
+          <td><ul class="req-list">${reqItems}</ul></td>
+        </tr>${noteRow}`;
+    }).join('');
 
-    const csvContent = rows.map(r =>
-      r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')
-    ).join('\r\n');
+    const urgentCount = (applicableLaws || []).filter(l => l.deadlineUrgent).length;
+    const lawCount = (applicableLaws || []).length;
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const summaryBoxHtml = lawCount === 0
+      ? `<div class="summary-box green">
+           <div class="summary-count green">0</div>
+           <div class="summary-text"><strong>No major mandates identified</strong> for this building based on the information provided.<br/>
+           A professional Compliance Assessment is recommended to confirm status and monitor emerging regulations.</div>
+         </div>`
+      : `<div class="summary-box">
+           <div class="summary-count">${lawCount}</div>
+           <div class="summary-text"><strong>regulation${lawCount > 1 ? 's' : ''} appl${lawCount > 1 ? 'y' : 'ies'}</strong> to this building —
+           including <strong>${urgentCount} with urgent deadline${urgentCount !== 1 ? 's' : ''}</strong> requiring immediate action.</div>
+         </div>`;
+
+    const regulationsTableHtml = lawCount === 0 ? '' : `
+      <div class="section-heading">Applicable Regulations</div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:27%">Regulation</th>
+            <th style="width:22%">Compliance Deadline</th>
+            <th style="width:22%">Estimated Penalty Exposure</th>
+            <th style="width:29%">Required Actions</th>
+          </tr>
+        </thead>
+        <tbody>${lawRowsHtml}</tbody>
+      </table>`;
+
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Compliance Assessment Report — Green Check Solutions</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt; color: #1E293B; background: #fff; }
+
+    .report-header { background: #1B4332; color: #fff; padding: 18px 36px; display: flex; justify-content: space-between; align-items: flex-start; }
+    .brand { font-size: 17pt; font-weight: 900; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
+    .brand-check { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: #D4A017; border-radius: 50%; font-size: 14pt; color: #1B4332; font-weight: 900; }
+    .tagline { font-size: 8pt; opacity: 0.75; margin-top: 4px; font-style: italic; }
+    .contact-info { text-align: right; font-size: 8.5pt; opacity: 0.85; line-height: 1.75; }
+
+    .title-bar { background: #D4A017; color: #1B4332; padding: 8px 36px; font-weight: 700; font-size: 12pt; display: flex; justify-content: space-between; align-items: center; }
+    .title-bar .report-date { font-size: 8.5pt; font-weight: 500; }
+
+    .content { padding: 20px 36px 16px; }
+
+    .meta-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 16px; }
+    .meta-box { background: #F7FDF9; border: 1px solid #D8F3DC; border-radius: 5px; padding: 9px 12px; }
+    .meta-label { font-size: 7.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #64748B; margin-bottom: 3px; }
+    .meta-value { font-size: 11pt; font-weight: 700; color: #1B4332; }
+
+    .section-heading { font-size: 9pt; font-weight: 700; color: #1B4332; border-bottom: 2px solid #D4A017; padding-bottom: 4px; margin: 16px 0 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .summary-box { display: flex; align-items: center; gap: 16px; background: #FEF2F2; border-left: 4px solid #DC2626; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-bottom: 14px; }
+    .summary-box.green { background: #F0FDF4; border-left-color: #1B4332; }
+    .summary-count { font-size: 28pt; font-weight: 900; color: #DC2626; line-height: 1; flex-shrink: 0; }
+    .summary-count.green { color: #1B4332; }
+    .summary-text { font-size: 10pt; line-height: 1.5; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-bottom: 6px; }
+    th { background: #1B4332; color: #fff; padding: 7px 10px; text-align: left; font-size: 8.5pt; font-weight: 700; letter-spacing: 0.02em; }
+    td { padding: 7px 10px; border-bottom: 1px solid #E2E8F0; vertical-align: top; }
+    tr.even-row td { background: #F7FDF9; }
+    tr.note-row td { background: #FFFBEB; font-size: 8pt; color: #64748B; padding: 5px 10px; }
+    .bill-num { font-size: 8pt; color: #64748B; }
+    .urgent-tag { display: inline-block; background: #DC2626; color: #fff; font-size: 7pt; font-weight: 700; padding: 2px 5px; border-radius: 3px; vertical-align: middle; margin-left: 4px; }
+    .req-list { margin: 0; padding-left: 14px; }
+    .req-list li { margin-bottom: 2px; }
+    .penalty-cell { color: #DC2626; font-weight: 700; }
+
+    .cta-box { background: #1B4332; color: #fff; border-radius: 7px; padding: 14px 20px; margin-top: 18px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .cta-left { font-size: 10pt; font-weight: 600; line-height: 1.4; }
+    .cta-right { text-align: right; flex-shrink: 0; font-size: 8.5pt; }
+    .cta-email { color: #D4A017; font-weight: 700; font-size: 11pt; }
+
+    .prepared-by { font-size: 7.5pt; color: #64748B; margin-top: 12px; line-height: 1.6; }
+    .disclaimer { font-size: 7pt; color: #94A3B8; border-top: 1px solid #E2E8F0; padding-top: 10px; margin-top: 10px; line-height: 1.6; }
+
+    @media print {
+      @page { margin: 10mm; size: letter; }
+      body { font-size: 9.5pt; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="report-header">
+  <div>
+    <div class="brand"><span class="brand-check">&#10003;</span>Green Check Solutions</div>
+    <div class="tagline">"Know the law. Meet the deadline. Avoid the penalty."</div>
+  </div>
+  <div class="contact-info">
+    info@greenchecksolutions.com<br/>
+    www.greenchecksolutions.com<br/>
+    John Slagboom, CEM, MBA
+  </div>
+</div>
+
+<div class="title-bar">
+  <span>Compliance Assessment Report</span>
+  <span class="report-date">Prepared: ${today}</span>
+</div>
+
+<div class="content">
+
+  <div class="section-heading">Building Profile</div>
+  <div class="meta-grid">
+    <div class="meta-box"><div class="meta-label">State</div><div class="meta-value">${stateName}</div></div>
+    <div class="meta-box"><div class="meta-label">City</div><div class="meta-value">${currentData.city || '—'}</div></div>
+    <div class="meta-box"><div class="meta-label">Gross Floor Area</div><div class="meta-value">${sf.toLocaleString()} SF</div></div>
+    <div class="meta-box"><div class="meta-label">Building Type</div><div class="meta-value">${currentData.buildingType || '—'}</div></div>
+    <div class="meta-box"><div class="meta-label">Year Built</div><div class="meta-value">${currentData.yearBuilt || '—'}</div></div>
+  </div>
+
+  <div class="section-heading">Screening Summary</div>
+  ${summaryBoxHtml}
+
+  ${regulationsTableHtml}
+
+  <div class="cta-box">
+    <div class="cta-left">Ready to get compliant? Green Check Solutions handles everything — benchmarking, Energy Management Plans, O&amp;M Plans, GHG inventories, and regulatory filings.</div>
+    <div class="cta-right">
+      <div>Schedule a free consultation:</div>
+      <div class="cta-email">info@greenchecksolutions.com</div>
+      <div style="margin-top:3px;opacity:0.75;">www.greenchecksolutions.com</div>
+    </div>
+  </div>
+
+  <div class="prepared-by">
+    Prepared by: John Slagboom, CEM, MBA &nbsp;|&nbsp; Certified Energy Manager (AEE) &nbsp;|&nbsp;
+    Qualified Energy Manager (WA State Dept. of Commerce) &nbsp;|&nbsp; GHG Accounting Certified (NAU) &nbsp;|&nbsp;
+    9+ years energy management experience
+  </div>
+
+  <div class="disclaimer">
+    This report is provided for informational purposes only and does not constitute legal or professional advice.
+    Compliance requirements vary by jurisdiction and are subject to regulatory change. Always verify requirements
+    with qualified professionals and the relevant regulatory authority before taking action. Green Check Solutions
+    assumes no liability for actions taken based solely on this report. Data current as of early 2026.
+  </div>
+
+</div>
+</body>
+</html>`;
+
+    const blob = new Blob([html], { type: 'text/html' });
     const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href     = url;
-    a.download = `GCS_Compliance_Report_${Date.now()}.csv`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const win  = window.open(url, '_blank');
+    if (win) {
+      win.addEventListener('load', () => {
+        setTimeout(() => { win.print(); URL.revokeObjectURL(url); }, 250);
+      });
+    }
   }
 
   /* =============================================
