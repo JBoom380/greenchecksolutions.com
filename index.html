@@ -1752,6 +1752,32 @@ html.dark .site-footer {
   color: rgba(255,255,255,0.5);
   font-weight: 400;
 }
+.footer-logo-lockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.footer-logo-lockup svg { flex-shrink: 0; }
+.footer-logo-text-stack {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.footer-logo-text-stack .fl-main {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+}
+.footer-logo-text-stack .fl-sub {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 
 .footer-tagline {
   font-size: 0.9rem;
@@ -2596,7 +2622,20 @@ html.dark .site-footer {
     <div class="footer-inner">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="logo"><img src="assets/images/logos/Default_Transparent_Image_1_PhthaloB.png" style="height:44px;width:auto;filter:brightness(0) invert(1);display:block;" alt="Green Check Solutions"></div>
+          <div class="footer-logo-lockup">
+            <svg width="52" height="52" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs><clipPath id="fgc"><circle cx="30" cy="30" r="27"/></clipPath></defs>
+              <rect x="3" y="3" width="54" height="30" fill="#1B4332" clip-path="url(#fgc)"/>
+              <rect x="3" y="30" width="54" height="30" fill="#1A2E6B" clip-path="url(#fgc)"/>
+              <path d="M 5 20 C 15 5, 46 7, 55 22" stroke="#D4A017" stroke-width="4.5" fill="none" stroke-linecap="round" clip-path="url(#fgc)"/>
+              <path d="M 7 38 C 16 52, 46 54, 55 40" stroke="#D4A017" stroke-width="3.5" fill="none" stroke-linecap="round" clip-path="url(#fgc)"/>
+              <circle cx="30" cy="30" r="27" fill="none" stroke="rgba(212,160,23,0.35)" stroke-width="1.5"/>
+            </svg>
+            <div class="footer-logo-text-stack">
+              <span class="fl-main">Green Check</span>
+              <span class="fl-sub">Solutions</span>
+            </div>
+          </div>
           <p class="footer-tagline">True costs. Clear answers. Smarter buildings.</p>
           <div class="footer-cem-badge">&#9733; CEM | MBA | LEAN SIX SIGMA GREEN BELT</div>
         </div>
