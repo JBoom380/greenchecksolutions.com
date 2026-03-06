@@ -83,7 +83,7 @@
           "name": "When is the Washington Clean Buildings Act deadline?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "There are three compliance deadlines based on building size. Tier 1 buildings over 220,000 SF must comply by June 1, 2026. Tier 2 buildings between 90,001 and 220,000 SF must comply by June 1, 2027. Tier 3 buildings between 50,001 and 90,000 SF must comply by June 1, 2028."
+            "text": "The CBPS has two tiers. Tier 1 covers all nonresidential buildings over 50,000 SF with a phased compliance schedule: buildings over 220,000 SF must comply by June 1, 2026; 90,001–220,000 SF by June 1, 2027; 50,001–90,000 SF by June 1, 2028. Tier 2 covers buildings 20,001–50,000 SF (and multifamily at or above 50,000 SF) with a deadline of July 1, 2027. Tier 2 buildings must benchmark and file an EMP but are not required to meet an EUI target."
           }
         },
         {
@@ -1502,7 +1502,7 @@ html.dark .info-box strong { color: #95D5B2; }
       <span class="section-label">Compliance Tiers</span>
       <h2 class="section-title">Compliance Tiers &amp; Deadlines</h2>
       <p class="section-subtitle">
-        The law phases in compliance requirements based on building size, with larger buildings required to comply first. Determine your tier and confirm your deadline below.
+        The CBPS establishes two tiers based on building size, with phased deadlines within Tier 1. Determine your tier and confirm your deadline below.
       </p>
     </div>
 
@@ -1518,25 +1518,35 @@ html.dark .info-box strong { color: #95D5B2; }
         </thead>
         <tbody>
           <tr>
-            <td><span class="badge-tier badge-tier-1">Tier 1</span></td>
-            <td>Greater than 220,000 SF</td>
+            <td><span class="badge-tier badge-tier-1">Tier 1 &mdash; Phase 1</span></td>
+            <td>Greater than 220,000 SF (nonresidential / hotel / motel / dorm)</td>
             <td class="deadline-urgent">June 1, 2026</td>
             <td>Immediate action required</td>
           </tr>
           <tr>
-            <td><span class="badge-tier badge-tier-2">Tier 2</span></td>
+            <td><span class="badge-tier badge-tier-2">Tier 1 &mdash; Phase 2</span></td>
             <td>90,001 &ndash; 220,000 SF</td>
             <td>June 1, 2027</td>
             <td>Begin benchmarking now</td>
           </tr>
           <tr>
-            <td><span class="badge-tier badge-tier-3">Tier 3</span></td>
+            <td><span class="badge-tier badge-tier-3">Tier 1 &mdash; Phase 3</span></td>
             <td>50,001 &ndash; 90,000 SF</td>
             <td>June 1, 2028</td>
             <td>Start planning</td>
           </tr>
+          <tr>
+            <td><span class="badge-tier badge-tier-2">Tier 2</span></td>
+            <td>20,001 &ndash; 50,000 SF (all types); multifamily &ge; 50,000 SF</td>
+            <td>July 1, 2027</td>
+            <td>Begin benchmarking now</td>
+          </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="info-box reveal reveal-delay-2">
+      <strong>Tier 2 simplified requirements:</strong> Buildings in the 20,001&ndash;50,000 SF range (and multifamily &ge;&nbsp;50,000&nbsp;SF) must complete benchmarking, an Energy Management Plan, and an O&amp;M plan &mdash; but are <strong>not required to meet an EUI target</strong>. Reporting only. Maximum penalty is <strong>$0.30/SF (one-time)</strong>.
     </div>
 
     <div class="prose reveal reveal-delay-2">
@@ -1566,39 +1576,39 @@ html.dark .info-box strong { color: #95D5B2; }
         <thead>
           <tr>
             <th>Building Type</th>
-            <th>EUI Target (kBtu/SF/yr)</th>
+            <th>EUI Target (kBtu/SF/yr) &mdash; Zone 4C&sup1;</th>
             <th>Notes</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Office</td>
-            <td><strong>50</strong></td>
-            <td>Includes general and medical office</td>
+            <td><strong>63 &ndash; 66</strong></td>
+            <td>Administrative/Professional: 63; Government/Other: 66. Medical office: 60</td>
           </tr>
           <tr>
-            <td>Retail / Strip Mall</td>
-            <td><strong>53</strong></td>
+            <td>Retail Store</td>
+            <td><strong>68</strong></td>
             <td>Excludes grocery / food service</td>
           </tr>
           <tr>
             <td>K&ndash;12 School</td>
             <td><strong>49</strong></td>
-            <td>Public and private schools</td>
+            <td>Elementary; high school: 48</td>
           </tr>
           <tr>
             <td>Multifamily Residential</td>
-            <td><strong>45</strong></td>
-            <td>5+ units, common areas included</td>
+            <td><strong>32</strong></td>
+            <td>Common areas and whole-building consumption</td>
           </tr>
           <tr>
             <td>Warehouse / Distribution</td>
-            <td><strong>24</strong></td>
-            <td>Unrefrigerated; refrigerated higher</td>
+            <td><strong>36</strong></td>
+            <td>Nonrefrigerated; refrigerated: 121</td>
           </tr>
           <tr>
             <td>Hospital / Acute Care</td>
-            <td><strong>250</strong></td>
+            <td><strong>215</strong></td>
             <td>Operations-intensive use type</td>
           </tr>
           <tr>
@@ -1606,9 +1616,18 @@ html.dark .info-box strong { color: #95D5B2; }
             <td><strong>68</strong></td>
             <td>All full-service hotel types</td>
           </tr>
+          <tr>
+            <td>College / University</td>
+            <td><strong>102</strong></td>
+            <td>Varies by research intensity; lab-heavy campuses may qualify for adjustments</td>
+          </tr>
         </tbody>
       </table>
     </div>
+
+    <p class="table-note reveal reveal-delay-2">
+      &sup1; Zone 4C = Western Washington (Seattle / Tacoma area). Zone 5B = Eastern Washington (Spokane area) targets are slightly higher for most building types. The full 113-type table with both climate zone columns is published in Table 7-2a of the <a href="https://www.commerce.wa.gov/growing-the-economy/energy/buildings/clean-buildings/" rel="noopener noreferrer" target="_blank">WA Commerce CBPS standard</a>.
+    </p>
 
     <div class="info-box reveal reveal-delay-2">
       <strong>Not sure where your building stands?</strong> ENERGY STAR Portfolio Manager calculates your current EUI once you enter 12 months of utility data. If your current EUI is higher than the target above, gap analysis will identify the most cost-effective path to compliance. <a href="../../#contact">Contact us</a> for a free initial assessment.
@@ -1841,7 +1860,7 @@ html.dark .info-box strong { color: #95D5B2; }
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="faq-answer">
-          There are three compliance deadlines based on building size. Tier 1 buildings over 220,000 SF must comply by <strong>June 1, 2026</strong>. Tier 2 buildings between 90,001 and 220,000 SF must comply by <strong>June 1, 2027</strong>. Tier 3 buildings between 50,001 and 90,000 SF must comply by <strong>June 1, 2028</strong>. Compliance is demonstrated using a full calendar year of energy data &mdash; for the 2026 deadline, that means your 2025 energy performance must meet the target.
+          The CBPS has two tiers. <strong>Tier 1</strong> covers all nonresidential buildings, hotels, motels, and dormitories over 50,000 SF, with a phased compliance schedule: buildings over 220,000 SF must comply by <strong>June 1, 2026</strong>; 90,001&ndash;220,000 SF by <strong>June 1, 2027</strong>; 50,001&ndash;90,000 SF by <strong>June 1, 2028</strong>. <strong>Tier 2</strong> covers buildings 20,001&ndash;50,000 SF (all types) and multifamily buildings at or above 50,000 SF &mdash; deadline <strong>July 1, 2027</strong>. Tier 2 buildings must benchmark and file an Energy Management Plan but are not required to meet an EUI target. Compliance is demonstrated using a full calendar year of energy data.
         </div>
       </div>
 

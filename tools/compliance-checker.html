@@ -1039,19 +1039,28 @@
       buildingTypes: ['Office','Retail','Warehouse','Healthcare','Education','Hotel','Industrial','Other'],
       deadlineText: 'June 2026 – June 2028 (phased by building size)',
       deadlineUrgent: true,
-      penaltyFormula: (sf) => `$5,000 + $${(sf * 1.50).toLocaleString()} = $${(5000 + sf * 1.50).toLocaleString()}/year`,
+      penaltyFormula: (sf) => `$5,000 + $${(sf * 1.00).toLocaleString()} = $${(5000 + sf * 1.00).toLocaleString()}/year`,
       penaltyBase: 5000,
-      penaltyPerSF: 1.50,
+      penaltyPerSF: 1.00,
       requirements: [
         'ENERGY STAR Portfolio Manager benchmarking',
-        'Meet EUI target for building type',
+        'Meet EUI target for building type (Table 7-2a)',
         'Energy Management Plan (EMP)',
         'Operations & Maintenance (O&M) Plan',
         'WA Commerce portal filing'
       ],
       service: 'Full CBPS Compliance Package',
       serviceLink: '#contact',
-      notes: 'Largest buildings (>220,000 SF) deadline June 2026; 90,000–220,000 SF deadline June 2027; 50,000–90,000 SF deadline June 2028.'
+      notes: 'Phase 1: >220,000 SF → June 2026; Phase 2: 90,001–220,000 SF → June 2027; Phase 3: 50,001–90,000 SF → June 2028.',
+      euiTargets: {
+        'Office':      { zone4c: '63–66', zone5b: '65–68', label: 'Office (Admin/Professional: 63; Government/Other: 66)' },
+        'Healthcare':  { zone4c: 215, zone5b: 215, label: 'Hospital / Acute Care' },
+        'Education':   { zone4c: 49,  zone5b: 50,  label: 'K–12 Elementary School' },
+        'Hotel':       { zone4c: 68,  zone5b: 72,  label: 'Hotel / Motel' },
+        'Retail':      { zone4c: 68,  zone5b: 75,  label: 'Retail Store' },
+        'Warehouse':   { zone4c: 36,  zone5b: 44,  label: 'Warehouse (nonrefrigerated)' },
+        'Industrial':  { zone4c: 36,  zone5b: 44,  label: 'Warehouse (nonrefrigerated) — verify type' },
+      }
     },
     {
       id: 'wa_cbps_tier2',
@@ -1063,19 +1072,21 @@
       sfThresholdMax: 50000,
       sfCondition: 'range',
       buildingTypes: ['Office','Retail','Warehouse','Healthcare','Education','Hotel','Industrial','Multifamily','Other'],
-      deadlineText: 'July 2027',
+      deadlineText: 'July 1, 2027',
       deadlineUrgent: true,
-      penaltyFormula: (sf) => `$${(sf * 0.30).toLocaleString()}/year ($0.30/SF)`,
+      penaltyFormula: (sf) => `$${(sf * 0.30).toLocaleString()} one-time ($0.30/SF)`,
       penaltyBase: 0,
       penaltyPerSF: 0.30,
       requirements: [
         'ENERGY STAR Portfolio Manager benchmarking',
-        'Meet Tier 2 EUI targets',
-        'Energy Management Plan'
+        'Energy Management Plan (EMP)',
+        'Operations & Maintenance (O&M) Plan',
+        'WA Commerce portal filing',
+        'Note: NOT required to meet an EUI target — reporting only'
       ],
       service: 'Full CBPS Compliance Package',
       serviceLink: '#contact',
-      notes: 'Applies to buildings 20,000–50,000 SF and multifamily buildings >20,000 SF in WA state.'
+      notes: 'Tier 2 buildings must benchmark and report but are not required to meet an EUI target. Applies to 20,001–50,000 SF buildings and multifamily ≥50,000 SF. Penalty is one-time, not annual.'
     },
     {
       id: 'wa_hb1390',
@@ -1167,7 +1178,7 @@
       billNumber: 'BERDO 2.0',
       state: 'MA',
       cities: ['Boston'],
-      sfThreshold: 35000,
+      sfThreshold: 20000,
       sfCondition: 'gte',
       buildingTypes: null,
       deadlineText: 'Annual — net-zero by 2050',
@@ -1295,17 +1306,17 @@
       sfThreshold: 35000,
       sfCondition: 'gte',
       buildingTypes: null,
-      deadlineText: 'Compliance targets starting 2028',
-      deadlineUrgent: false,
-      penaltyFormula: () => 'TBD — rulemaking in progress',
+      deadlineText: 'Jun 2028 – Jun 2030 (phased Tier 1); Tier 2: Jul 2028',
+      deadlineUrgent: true,
+      penaltyFormula: (sf) => `Up to $5,000 + $${(sf * 1.00).toLocaleString()}/yr (non-report); $1,500 + $${(sf * 0.20).toLocaleString()}/yr (non-compliant)`,
       requirements: [
-        'ENERGY STAR benchmarking',
-        'Meet energy performance targets',
-        'Compliance pathway documentation'
+        'ENERGY STAR Portfolio Manager benchmarking (begin 2026)',
+        'Meet EUI performance target for building type',
+        'Compliance report submission to ODOE'
       ],
       service: 'Compliance Assessment',
       serviceLink: '#contact',
-      notes: 'In addition to existing ASHRAE Standard 100-based requirements effective January 2025.'
+      notes: 'Penalty rules finalized Aug 5, 2025 (ODOE Rule BPS 010). No Tier 2 civil penalties under current rules. Tier 1 deadlines: ≥200k SF Jun 2028; 90k–200k SF Jun 2029; 35k–90k SF Jun 2030.'
     },
     {
       id: 'md_csna',
@@ -1646,6 +1657,16 @@
               A ${sf.toLocaleString()} SF building faces: ${penaltyText}
             </div>
           </div>
+
+          ${law.euiTargets && law.euiTargets[currentData.buildingType] ? (() => {
+            const t = law.euiTargets[currentData.buildingType];
+            return `<div class="penalty-box" style="background:#F0FDF4;border-color:#86EFAC;">
+              <div class="penalty-label">WA CBPS EUI Target (Table 7-2a)</div>
+              <div class="penalty-value" style="color:#166534;">
+                ${escHtml(t.label)}: <strong>${t.zone4c} kBtu/SF/yr</strong> (Zone 4C / Western WA) &nbsp;|&nbsp; ${t.zone5b} kBtu/SF/yr (Zone 5B / Eastern WA)
+              </div>
+            </div>`;
+          })() : ''}
 
           <div class="req-section-label">Required Actions</div>
           <ul class="req-list">${reqItems}</ul>
