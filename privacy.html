@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | Green Check Solutions</title>
+  <meta name="description" content="Privacy Policy for Green Check Solutions LLC — how we collect, use, and protect your information.">
+  <link rel="canonical" href="https://www.greenchecksolutions.com/privacy.html">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #1B4332;
+      --primary-light: #2D6A4F;
+      --accent: #D4A017;
+      --accent-hover: #b8880f;
+      --secondary: #40916C;
+      --tint: #D8F3DC;
+      --cream: #F5F1EB;
+      --navy: #1E293B;
+      --bg: #FAFAF7;
+      --card-bg: #ffffff;
+      --card-border: #E8E4DD;
+      --text: #1E293B;
+      --text-secondary: #4A5568;
+      --text-muted: #718096;
+      --border: #E8E4DD;
+      --nav-bg: rgba(250,250,247,0.9);
+      --footer-dark: #0D2818;
+      --font-heading: 'Instrument Serif', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --radius: 6px;
+      --max-width: 1200px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html.dark {
+      --bg: #0A1F12;
+      --card-bg: #132A1B;
+      --card-border: #1E3D28;
+      --text: #E2E8F0;
+      --text-secondary: #A0AEC0;
+      --text-muted: #718096;
+      --border: #1E3D28;
+      --nav-bg: rgba(10,31,18,0.95);
+      --tint: #0D2818;
+      --cream: #0F2318;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+      transition: background var(--transition), color var(--transition);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .site-header.scrolled {
+      border-color: var(--border);
+      box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+    }
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: var(--primary);
+      font-style: italic;
+    }
+    html.dark .logo-text { color: #52B788; }
+    .logo-suffix {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    nav { flex: 1; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+      background: var(--tint);
+    }
+    html.dark .nav-links a:hover { color: #52B788; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .dark-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dark-toggle-icon { font-size: 0.875rem; color: var(--text-muted); }
+    .dark-toggle-switch {
+      width: 36px;
+      height: 20px;
+      background: var(--border);
+      border-radius: 10px;
+      position: relative;
+      transition: background var(--transition);
+    }
+    .dark-toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: white;
+      transition: transform var(--transition);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    html.dark .dark-toggle-switch { background: var(--secondary); }
+    html.dark .dark-toggle-switch::after { transform: translateX(16px); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(212,160,23,0.35);
+    }
+    .btn-sm { padding: 8px 16px; font-size: 0.8125rem; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 64px 0 0 0;
+      z-index: 99;
+      pointer-events: none;
+    }
+    .mobile-nav.open { pointer-events: all; }
+    .mobile-nav-panel {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      transform: translateY(-100%);
+      transition: transform var(--transition);
+    }
+    .mobile-nav.open .mobile-nav-panel { transform: translateY(0); }
+    .mobile-nav-links { display: flex; flex-direction: column; gap: 4px; }
+    .mobile-nav-links a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      display: block;
+    }
+    .mobile-nav-links a:hover { background: var(--tint); color: var(--primary); }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-right .btn:not(.btn-sm) { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: block; }
+    }
+    @media (max-width: 480px) {
+      .nav-right .btn-sm { display: none; }
+    }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: var(--primary);
+      color: white;
+      padding: 120px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(64,145,108,0.18) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(212,160,23,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+    .page-overline {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .page-hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .page-hero p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ===== CONTENT ===== */
+    .content-section {
+      padding: 72px 0 80px;
+    }
+    .content-inner {
+      max-width: 760px;
+    }
+    .content-inner h2 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--primary);
+      margin: 40px 0 12px;
+    }
+    html.dark .content-inner h2 { color: #52B788; }
+    .content-inner h2:first-child { margin-top: 0; }
+    .content-inner p {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+    html.dark .content-inner p { color: var(--text-secondary); }
+    .content-inner ul {
+      list-style: disc;
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+    .content-inner ul li {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    .content-inner a {
+      color: var(--primary-light);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    html.dark .content-inner a { color: #52B788; }
+    .content-inner a:hover { color: var(--accent); }
+    .disclaimer-box {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 32px 0;
+    }
+    html.dark .disclaimer-box { background: var(--card-bg); border-color: var(--card-border); }
+    .disclaimer-box p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .effective-date {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      background: var(--footer-dark);
+      color: rgba(255,255,255,0.75);
+      padding: 64px 0 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand .logo { margin-bottom: 12px; }
+    .footer-brand .logo-text { color: #52B788; }
+    .footer-brand .logo-suffix { color: rgba(255,255,255,0.4); }
+    .footer-tagline {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .footer-cem-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(212,160,23,0.3);
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 3px;
+    }
+    .footer-heading {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 16px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: white; }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+    }
+    .footer-copyright { font-size: 0.8125rem; color: rgba(255,255,255,0.35); }
+    .footer-legal { display: flex; gap: 16px; }
+    .footer-legal a {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.4);
+      transition: color var(--transition);
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.8); }
+    .footer-socials { display: flex; gap: 12px; }
+    .footer-socials a {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.4);
+      transition: color var(--transition);
+    }
+    .footer-socials a:hover { color: white; }
+
+    @media (max-width: 860px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><span class="logo-text">Green Check</span><span class="logo-suffix">Solutions</span></a>
+    <nav><ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#compliance">Compliance</a></li>
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="index.html#about">Our Expertise</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul></nav>
+    <div class="nav-right">
+      <div class="dark-toggle"><span class="dark-toggle-icon" id="darkIcon">&#9790;</span><button class="dark-toggle-switch" id="darkToggle" aria-label="Toggle dark mode"></button></div>
+      <a href="index.html#contact" class="btn btn-primary btn-sm">Free Assessment</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-nav" id="mobileNav"><div class="mobile-nav-panel">
+  <ul class="mobile-nav-links">
+    <li><a href="index.html#services" data-mobile-close>Services</a></li>
+    <li><a href="index.html#compliance" data-mobile-close>Compliance</a></li>
+    <li><a href="index.html#about" data-mobile-close>Our Expertise</a></li>
+    <li><a href="index.html#contact" data-mobile-close>Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="btn btn-primary" data-mobile-close>Get a Free Assessment</a>
+</div></div>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <span class="page-overline">Legal</span>
+        <h1>Privacy Policy</h1>
+        <p>How Green Check Solutions LLC collects, uses, and protects your information.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="content-inner">
+        <p class="effective-date">Effective date: March 6, 2026</p>
+
+        <div class="disclaimer-box">
+          <p>This is not legal advice. This policy describes our general data practices for informational purposes only. For questions about your specific situation, consult qualified legal counsel.</p>
+        </div>
+
+        <h2>Who We Are</h2>
+        <p>Green Check Solutions LLC ("GCS," "we," "us," or "our") is a CEM-certified energy consulting firm based in Washington State. We operate the website at greenchecksolutions.com. For privacy-related questions, contact us at <a href="mailto:info@greenchecksolutions.com">info@greenchecksolutions.com</a>.</p>
+
+        <h2>Information We Collect</h2>
+        <p>We collect only what is necessary to respond to your inquiries and deliver our services:</p>
+        <ul>
+          <li><strong>Contact form submissions</strong> — name, email address, company name, and the message you provide when you use our contact form or request a free assessment.</li>
+          <li><strong>Communications</strong> — email correspondence you initiate with us.</li>
+          <li><strong>Basic usage data</strong> — standard server logs (IP address, browser type, pages visited) may be retained briefly for security and performance purposes.</li>
+        </ul>
+        <p>We do not use tracking pixels, behavioral advertising, or third-party analytics platforms that profile individual visitors.</p>
+
+        <h2>How We Use Your Information</h2>
+        <p>Information you provide through our contact form or via email is used exclusively for Green Check Solutions LLC business purposes:</p>
+        <ul>
+          <li>Responding to your inquiry or assessment request</li>
+          <li>Delivering contracted services (utility bill auditing, benchmarking, BPS compliance, etc.)</li>
+          <li>Sending service-related follow-up communications</li>
+          <li>Sending occasional marketing communications if you have opted in</li>
+        </ul>
+        <p>Your information is never sold, rented, or shared with third parties for their own marketing or commercial purposes.</p>
+
+        <h2>Marketing Communications</h2>
+        <p>If you have opted in to receive updates from us, you may occasionally receive emails about GCS services, compliance deadlines, or industry resources. You can opt out of marketing emails at any time by replying "unsubscribe" to any such message or by contacting us directly at <a href="mailto:info@greenchecksolutions.com">info@greenchecksolutions.com</a>. Opting out of marketing communications does not affect service-related correspondence.</p>
+
+        <h2>Data Sharing</h2>
+        <p>We do not sell your personal information. We may share your information only in the following limited circumstances:</p>
+        <ul>
+          <li><strong>Service providers</strong> — third-party tools we use to operate our business (e.g., email platforms) under confidentiality obligations and only to the extent necessary to provide those services.</li>
+          <li><strong>Legal requirements</strong> — if required by law, court order, or governmental authority.</li>
+        </ul>
+
+        <h2>Data Retention</h2>
+        <p>We retain contact and project information for as long as necessary to fulfill the purposes described above or as required by applicable law. You may request deletion of your personal data at any time by contacting us at <a href="mailto:info@greenchecksolutions.com">info@greenchecksolutions.com</a>, and we will honor reasonable deletion requests within 30 days, subject to any legal obligations to retain records.</p>
+
+        <h2>Your Rights</h2>
+        <p>Depending on your jurisdiction, you may have rights to access, correct, or delete the personal information we hold about you. To exercise any of these rights, contact us at <a href="mailto:info@greenchecksolutions.com">info@greenchecksolutions.com</a>.</p>
+
+        <h2>Security</h2>
+        <p>We take reasonable technical and organizational measures to protect the information you share with us. No method of transmission over the internet is completely secure, and we cannot guarantee absolute security.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this policy from time to time. When we do, we will update the effective date at the top of this page. Continued use of our website after any changes constitutes acceptance of the updated policy.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about this privacy policy? Email us at <a href="mailto:info@greenchecksolutions.com">info@greenchecksolutions.com</a>.</p>
+        <p>Also see our <a href="terms.html">Terms of Service</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container"><div class="footer-inner"><div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo"><span class="logo-text">Green Check</span><span class="logo-suffix">Solutions</span></div>
+      <p class="footer-tagline">True costs. Clear answers. Smarter buildings.</p>
+      <div class="footer-cem-badge">&#9733; CEM | LEAN SIX SIGMA GREEN BELT</div>
+    </div>
+    <div><div class="footer-heading">Services</div><ul class="footer-links">
+      <li><a href="services/utility-bill-auditing/">Utility Bill Auditing</a></li>
+      <li><a href="services/building-performance-standard-compliance/">BPS Compliance</a></li>
+      <li><a href="services/energy-benchmarking/">Energy Benchmarking</a></li>
+      <li><a href="services/utility-tax-recovery/">Utility Tax Recovery</a></li>
+    </ul></div>
+    <div><div class="footer-heading">Compliance</div><ul class="footer-links">
+      <li><a href="compliance/washington-clean-buildings-act/">WA Clean Buildings Act</a></li>
+      <li><a href="compliance/oregon-bps/">Oregon BPS</a></li>
+    </ul></div>
+    <div><div class="footer-heading">Resources</div><ul class="footer-links">
+      <li><a href="resources/eui-benchmarks/">EUI Benchmarks</a></li>
+      <li><a href="resources/bps-deadline-tracker/">BPS Deadline Tracker</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">&copy; 2026 Green Check Solutions LLC. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div class="footer-socials"><a href="mailto:info@greenchecksolutions.com" aria-label="Email">&#9993;</a></div>
+  </div>
+  </div></div>
+</footer>
+
+<script>
+(function(){'use strict';
+  const htmlEl=document.documentElement,darkToggle=document.getElementById('darkToggle'),darkIcon=document.getElementById('darkIcon');
+  function setDarkMode(on){on?htmlEl.classList.add('dark'):htmlEl.classList.remove('dark');localStorage.setItem('gcsDarkMode',on?'on':'off');if(darkIcon)darkIcon.textContent=on?'\u2600':'\u263E';}
+  const saved=localStorage.getItem('gcsDarkMode');
+  if(saved==='on')setDarkMode(true);else if(saved===null&&window.matchMedia('(prefers-color-scheme: dark)').matches)setDarkMode(true);
+  if(darkToggle)darkToggle.addEventListener('click',()=>setDarkMode(!htmlEl.classList.contains('dark')));
+  const header=document.getElementById('siteHeader');
+  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>40),{passive:true});
+  const hamburger=document.getElementById('hamburger'),mobileNav=document.getElementById('mobileNav');
+  hamburger.addEventListener('click',()=>{const o=mobileNav.classList.toggle('open');hamburger.classList.toggle('active',o);document.body.style.overflow=o?'hidden':'';});
+  document.querySelectorAll('[data-mobile-close]').forEach(el=>el.addEventListener('click',()=>{mobileNav.classList.remove('open');hamburger.classList.remove('active');document.body.style.overflow='';}));
+})();
+</script>
+</body>
+</html>

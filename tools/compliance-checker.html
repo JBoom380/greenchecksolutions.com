@@ -950,7 +950,7 @@
         <!-- Hidden Formspree form -->
         <form
           id="formspree-form"
-          action="https://formspree.io/f/REPLACE_WITH_ID"
+          action="https://formspree.io/f/meelnyop"
           method="POST"
           style="display:none;"
         >
@@ -1258,7 +1258,7 @@
       billNumber: 'DC BEPS',
       state: 'DC',
       cities: null,
-      sfThreshold: 10000,
+      sfThreshold: 50000,
       sfCondition: 'gte',
       buildingTypes: null,
       deadlineText: 'Compliance periods — expanding coverage',
@@ -1267,11 +1267,12 @@
       requirements: [
         'ENERGY STAR benchmarking',
         'Meet energy performance targets',
-        'Compliance period filings'
+        'Compliance period filings',
+        'Threshold expands to 25,000 SF in 2028 and 10,000 SF in 2034'
       ],
       service: 'Compliance Assessment + Annual Benchmarking',
       serviceLink: '#contact',
-      notes: 'Penalty of $10/SF, capped at $7.5 million. Coverage expanding to buildings >10,000 SF.'
+      notes: 'Penalty of $10/SF, capped at $7.5 million. Currently applies to buildings >50,000 SF; expands to >25,000 SF in 2028 and >10,000 SF in 2034.'
     },
     {
       id: 'ca_ab802',
@@ -1466,7 +1467,7 @@
     if (!sfInput.value || isNaN(sfVal) || sfVal < 1) { showError(sfInput, 'sf-error'); valid = false; }
 
     const yearVal = parseInt(yearInput.value, 10);
-    if (!yearInput.value || isNaN(yearVal) || yearVal < 1800 || yearVal > 2026) {
+    if (!yearInput.value || isNaN(yearVal) || yearVal < 1800 || yearVal > new Date().getFullYear()) {
       showError(yearInput, 'year-error'); valid = false;
     }
 

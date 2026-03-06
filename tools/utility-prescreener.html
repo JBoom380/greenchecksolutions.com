@@ -817,18 +817,6 @@
           <input type="number" id="annual-spend" placeholder="e.g. 85000" min="0" step="1000">
         </div>
 
-        <div class="field-group">
-          <label>Prior Professional Audit?</label>
-          <div class="radio-group">
-            <label class="radio-label">
-              <input type="radio" name="prior-audit" value="yes"> Yes
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="prior-audit" value="no" checked> No
-            </label>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -1557,9 +1545,6 @@
     document.getElementById('state').value       = '';
     document.getElementById('entity-type').value = '';
     document.getElementById('annual-spend').value = '';
-    document.querySelectorAll('input[name="prior-audit"]').forEach(r => {
-      r.checked = r.value === 'no';
-    });
     populateGrids();
     document.getElementById('error-box').classList.remove('visible');
     document.getElementById('results-section').style.display = 'none';
