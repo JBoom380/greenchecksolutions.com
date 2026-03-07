@@ -413,6 +413,137 @@ html.dark .logo-text {
 .nav-links a:hover::after { width: 100%; }
 html.dark .nav-links a:hover { color: var(--accent); }
 
+/* Dropdown menus */
+.nav-links .has-dropdown { position: relative; }
+.nav-links .has-dropdown > a::after { display: none; }
+.nav-links .has-dropdown > a .dropdown-arrow {
+  display: inline-block;
+  margin-left: 3px;
+  font-size: 0.65em;
+  transition: transform var(--transition);
+}
+.nav-links .has-dropdown:hover > a .dropdown-arrow { transform: rotate(180deg); }
+.nav-links .dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 240px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 8px 0;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  z-index: 1001;
+}
+html.dark .nav-links .dropdown { box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.nav-links .has-dropdown:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-links .dropdown::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+.nav-links .dropdown li { padding: 0; }
+.nav-links .dropdown a {
+  display: block;
+  padding: 8px 20px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: background var(--transition), color var(--transition);
+}
+.nav-links .dropdown a::after { display: none; }
+.nav-links .dropdown a:hover {
+  background: var(--tint);
+  color: var(--primary);
+}
+html.dark .nav-links .dropdown a:hover {
+  background: var(--bg-alt);
+  color: var(--accent);
+}
+.nav-links .dropdown .dropdown-label {
+  display: block;
+  padding: 8px 20px 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.nav-links .dropdown .dropdown-label:not(:first-child) {
+  margin-top: 4px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+.site-header:not(.scrolled) .nav-links .dropdown {
+  background: rgba(10,31,18,0.95);
+  border-color: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+}
+.site-header:not(.scrolled) .nav-links .dropdown a {
+  color: rgba(255,255,255,0.7);
+}
+.site-header:not(.scrolled) .nav-links .dropdown a:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--accent);
+}
+.site-header:not(.scrolled) .nav-links .dropdown .dropdown-label {
+  color: rgba(255,255,255,0.4);
+}
+.site-header:not(.scrolled) .nav-links .dropdown .dropdown-label:not(:first-child) {
+  border-top-color: rgba(255,255,255,0.1);
+}
+
+/* Mobile dropdown accordion */
+.mobile-nav-links .mobile-dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.mobile-nav-links .mobile-dropdown-toggle .dropdown-arrow {
+  font-size: 0.7em;
+  transition: transform var(--transition);
+}
+.mobile-nav-links .mobile-dropdown-toggle.open .dropdown-arrow { transform: rotate(180deg); }
+.mobile-nav-links .mobile-sub {
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.mobile-nav-links .mobile-sub.open { max-height: 600px; }
+.mobile-nav-links .mobile-sub a {
+  padding: 10px 20px 10px 28px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border-bottom: none;
+}
+.mobile-nav-links .mobile-sub .mobile-sub-label {
+  display: block;
+  padding: 10px 20px 2px 28px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
 .nav-right {
   display: flex;
   align-items: center;
@@ -2067,14 +2198,31 @@ html.dark .site-footer {
 
     <nav>
       <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#compliance">Compliance</a></li>
+        <li class="has-dropdown">
+          <a href="#services">Services <span class="dropdown-arrow">&#9660;</span></a>
+          <ul class="dropdown">
+            <li class="dropdown-label">Services</li>
+            <li><a href="/services/utility-bill-auditing/">Utility Bill Auditing</a></li>
+            <li><a href="/services/utility-tax-recovery/">Utility Tax Recovery</a></li>
+            <li><a href="/services/building-performance-standard-compliance/">BPS Compliance</a></li>
+            <li><a href="/services/energy-benchmarking/">Energy Benchmarking</a></li>
+            <li><a href="/services/ghg-emissions-reporting/">GHG Emissions Reporting</a></li>
+            <li class="dropdown-label">Compliance Guides</li>
+            <li><a href="/compliance/washington-clean-buildings-act/">Washington Clean Buildings Act</a></li>
+            <li><a href="/compliance/oregon-bps/">Oregon BPS</a></li>
+            <li><a href="/compliance/colorado-bps/">Colorado BPS</a></li>
+            <li><a href="/compliance/nyc-local-law-97/">NYC Local Law 97</a></li>
+            <li class="dropdown-label">Resources</li>
+            <li><a href="/resources/">All Resources</a></li>
+            <li><a href="/resources/bps-deadline-tracker/">BPS Deadline Tracker</a></li>
+            <li><a href="/resources/eui-benchmarks/">EUI Benchmarks</a></li>
+          </ul>
+        </li>
         <li><a href="#how-it-works">How It Works</a></li>
         <li><a href="#about">Our Expertise</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#why-us">Why Us</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="resources/bps-deadline-tracker/">Deadline Tracker</a></li>
       </ul>
     </nav>
 
@@ -2095,8 +2243,26 @@ html.dark .site-footer {
 <div class="mobile-nav" id="mobileNav">
   <div class="mobile-nav-panel">
     <ul class="mobile-nav-links">
-      <li><a href="#services" data-mobile-close>Services</a></li>
-      <li><a href="#compliance" data-mobile-close>Compliance</a></li>
+      <li>
+        <a href="#services" class="mobile-dropdown-toggle" data-mobile-dropdown>Services <span class="dropdown-arrow">&#9660;</span></a>
+        <ul class="mobile-sub">
+          <li class="mobile-sub-label">Services</li>
+          <li><a href="/services/utility-bill-auditing/" data-mobile-close>Utility Bill Auditing</a></li>
+          <li><a href="/services/utility-tax-recovery/" data-mobile-close>Utility Tax Recovery</a></li>
+          <li><a href="/services/building-performance-standard-compliance/" data-mobile-close>BPS Compliance</a></li>
+          <li><a href="/services/energy-benchmarking/" data-mobile-close>Energy Benchmarking</a></li>
+          <li><a href="/services/ghg-emissions-reporting/" data-mobile-close>GHG Emissions Reporting</a></li>
+          <li class="mobile-sub-label">Compliance Guides</li>
+          <li><a href="/compliance/washington-clean-buildings-act/" data-mobile-close>Washington Clean Buildings Act</a></li>
+          <li><a href="/compliance/oregon-bps/" data-mobile-close>Oregon BPS</a></li>
+          <li><a href="/compliance/colorado-bps/" data-mobile-close>Colorado BPS</a></li>
+          <li><a href="/compliance/nyc-local-law-97/" data-mobile-close>NYC Local Law 97</a></li>
+          <li class="mobile-sub-label">Resources</li>
+          <li><a href="/resources/" data-mobile-close>All Resources</a></li>
+          <li><a href="/resources/bps-deadline-tracker/" data-mobile-close>BPS Deadline Tracker</a></li>
+          <li><a href="/resources/eui-benchmarks/" data-mobile-close>EUI Benchmarks</a></li>
+        </ul>
+      </li>
       <li><a href="#how-it-works" data-mobile-close>How It Works</a></li>
       <li><a href="#about" data-mobile-close>Our Expertise</a></li>
       <li><a href="#faq" data-mobile-close>FAQ</a></li>
@@ -2835,6 +3001,18 @@ html.dark .site-footer {
     if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
       closeMobileNav();
     }
+  });
+
+  // Mobile dropdown accordion
+  document.querySelectorAll('[data-mobile-dropdown]').forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      this.classList.toggle('open');
+      var sub = this.nextElementSibling;
+      if (sub && sub.classList.contains('mobile-sub')) {
+        sub.classList.toggle('open');
+      }
+    });
   });
 
   /* ----------------------------------------------------------
