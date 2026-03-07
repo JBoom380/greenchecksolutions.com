@@ -744,6 +744,23 @@
                   <option value="DC">District of Columbia (DC)</option>
                   <option value="OR">Oregon (OR)</option>
                   <option value="MD">Maryland (MD)</option>
+                  <option value="IL">Illinois (IL)</option>
+                  <option value="MN">Minnesota (MN)</option>
+                  <option value="GA">Georgia (GA)</option>
+                  <option value="PA">Pennsylvania (PA)</option>
+                  <option value="TX">Texas (TX)</option>
+                  <option value="UT">Utah (UT)</option>
+                  <option value="NV">Nevada (NV)</option>
+                  <option value="WI">Wisconsin (WI)</option>
+                  <option value="MO">Missouri (MO)</option>
+                  <option value="FL">Florida (FL)</option>
+                  <option value="NJ">New Jersey (NJ)</option>
+                  <option value="VA">Virginia (VA)</option>
+                  <option value="CT">Connecticut (CT)</option>
+                  <option value="HI">Hawaii (HI)</option>
+                  <option value="MI">Michigan (MI)</option>
+                  <option value="NC">North Carolina (NC)</option>
+                  <option value="AZ">Arizona (AZ)</option>
                 </optgroup>
                 <optgroup label="All Other States">
                   <option value="AL">Alabama</option>
@@ -1013,12 +1030,29 @@
   const CITIES_BY_STATE = {
     WA: ['Seattle', 'Spokane', 'Tacoma', 'Bellevue', 'Kirkland', 'Redmond', 'Olympia', 'Vancouver', 'Pullman', 'Other WA City'],
     NY: ['New York City', 'Buffalo', 'Rochester', 'Albany', 'Syracuse', 'Other NY City'],
-    CA: ['Los Angeles', 'San Francisco', 'San Diego', 'San Jose', 'Sacramento', 'Oakland', 'Other CA City'],
-    MA: ['Boston', 'Worcester', 'Springfield', 'Cambridge', 'Lowell', 'Other MA City'],
-    CO: ['Denver', 'Colorado Springs', 'Aurora', 'Boulder', 'Aspen', 'Fort Collins', 'Other CO City'],
+    CA: ['Los Angeles', 'San Francisco', 'San Diego', 'San Jose', 'Sacramento', 'Oakland', 'Berkeley', 'Chula Vista', 'Other CA City'],
+    MA: ['Boston', 'Cambridge', 'Newton', 'Worcester', 'Springfield', 'Lowell', 'Other MA City'],
+    CO: ['Denver', 'Boulder', 'Colorado Springs', 'Aurora', 'Aspen', 'Fort Collins', 'Other CO City'],
     DC: ['Washington DC'],
     OR: ['Portland', 'Salem', 'Eugene', 'Bend', 'Other OR City'],
-    MD: ['Baltimore', 'Annapolis', 'Rockville', 'Bethesda', 'Other MD City'],
+    MD: ['Baltimore', 'Rockville', 'Bethesda', 'Silver Spring', 'Gaithersburg', 'Annapolis', 'Other MD City'],
+    IL: ['Chicago', 'Evanston', 'Aurora', 'Naperville', 'Other IL City'],
+    MN: ['Minneapolis', 'St. Paul', 'Rochester', 'Duluth', 'Other MN City'],
+    GA: ['Atlanta', 'Augusta', 'Columbus', 'Savannah', 'Other GA City'],
+    PA: ['Philadelphia', 'Pittsburgh', 'Allentown', 'Erie', 'Other PA City'],
+    TX: ['Austin', 'Houston', 'Dallas', 'San Antonio', 'Fort Worth', 'El Paso', 'Other TX City'],
+    UT: ['Salt Lake City', 'West Valley City', 'Provo', 'West Jordan', 'Other UT City'],
+    NV: ['Las Vegas', 'Reno', 'Henderson', 'North Las Vegas', 'Other NV City'],
+    WI: ['Madison', 'Milwaukee', 'Green Bay', 'Kenosha', 'Other WI City'],
+    MO: ['St. Louis', 'Kansas City', 'Springfield', 'Independence', 'Other MO City'],
+    FL: ['Miami', 'Jacksonville', 'Tampa', 'Orlando', 'Miami Beach', 'Other FL City'],
+    NJ: ['Newark', 'Jersey City', 'Trenton', 'Camden', 'Other NJ City'],
+    VA: ['Arlington', 'Alexandria', 'Richmond', 'Virginia Beach', 'Other VA City'],
+    CT: ['Hartford', 'New Haven', 'Stamford', 'Bridgeport', 'Other CT City'],
+    HI: ['Honolulu', 'Hilo', 'Kailua', 'Other HI City'],
+    MI: ['Detroit', 'Ann Arbor', 'Grand Rapids', 'Lansing', 'Other MI City'],
+    NC: ['Charlotte', 'Raleigh', 'Durham', 'Greensboro', 'Other NC City'],
+    AZ: ['Phoenix', 'Tucson', 'Scottsdale', 'Mesa', 'Other AZ City'],
   };
 
   const REGULATED_STATES = Object.keys(CITIES_BY_STATE);
@@ -1359,6 +1393,547 @@
       service: 'Compliance Assessment',
       serviceLink: '#contact',
       notes: 'Applies to federal agencies with >$1M annual energy costs.'
+    },
+    {
+      id: 'cambridge_beudo',
+      name: 'Cambridge Building Energy Use Disclosure Ordinance (BEUDO)',
+      billNumber: 'Cambridge Ordinance No. 1378',
+      state: 'MA',
+      cities: ['Cambridge'],
+      sfThreshold: 25000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual reporting; 2030 interim emissions reduction target',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Carbon credit purchase or civil penalties',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Annual GHG emissions disclosure to City of Cambridge',
+        'Meet 2030 interim emissions reduction target'
+      ],
+      service: 'GHG Inventory + Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'Cambridge BEUDO applies in addition to MA LBER statewide requirement.'
+    },
+    {
+      id: 'newton_beps',
+      name: 'Newton Building Emissions Performance Standard',
+      billNumber: 'Newton Ordinance 2021-034',
+      state: 'MA',
+      cities: ['Newton'],
+      sfThreshold: 20000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: '2027 (100,000+ SF); 2028 (50,000–99,999 SF)',
+      deadlineUrgent: true,
+      penaltyFormula: () => 'Civil penalties',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Annual GHG emissions reporting to City of Newton',
+        'Meet building-type-specific emissions intensity targets'
+      ],
+      service: 'GHG Inventory + Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'Newton buildings must also comply with MA LBER statewide requirement.'
+    },
+    {
+      id: 'boulder_bpo',
+      name: 'Boulder Building Performance Ordinance (BPO)',
+      billNumber: 'Boulder Revised Code 10-9-5',
+      state: 'CO',
+      cities: ['Boulder'],
+      sfThreshold: 20000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: '2025 RCx completion; EUI targets 2026+',
+      deadlineUrgent: true,
+      penaltyFormula: () => 'Civil penalties',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Retro-commissioning (RCx) every 5 years — mandatory',
+        'Meet EUI reduction targets',
+        'LEED O&M or ENERGY STAR certification as exemption path'
+      ],
+      service: 'Compliance Assessment + RCx Coordination',
+      serviceLink: '#contact',
+      notes: 'Boulder requires mandatory RCx — not just recommended. CO State BPS also applies to buildings ≥50,000 SF.'
+    },
+    {
+      id: 'montgomery_beps',
+      name: 'Montgomery County Building Energy Performance Standards',
+      billNumber: 'Montgomery County Bill 14-21',
+      state: 'MD',
+      cities: ['Rockville', 'Bethesda', 'Silver Spring', 'Gaithersburg', 'Germantown'],
+      sfThreshold: 25000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: '2028 (>250,000 SF); 2030 (100,000–250,000 SF); 2033–2036 (smaller tiers)',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Civil penalties per rulemaking',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Meet building-type-specific energy performance targets by deadline tier',
+        'Submit compliance documentation to Montgomery County DEP'
+      ],
+      service: 'Compliance Assessment + Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Separate from and additional to MD statewide CSNA.'
+    },
+    {
+      id: 'la_ebewe',
+      name: 'LA Existing Buildings Energy & Water Efficiency (EBEWE)',
+      billNumber: 'LA Ordinance 184674',
+      state: 'CA',
+      cities: ['Los Angeles'],
+      sfThreshold: 20000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual benchmarking by April 1; audits & RCx every 5 years',
+      deadlineUrgent: true,
+      penaltyFormula: () => 'Up to $202/violation/day',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking by April 1',
+        'Energy & water audit every 5 years (ASHRAE Level II equivalent)',
+        'Retro-commissioning (RCx) every 5 years',
+        'Submit to LA Department of Building and Safety (LADBS)'
+      ],
+      service: 'Annual Benchmarking + Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'Combined benchmarking + audit + RCx cycle. CA AB 802 statewide requirements also apply.'
+    },
+    {
+      id: 'sanjose_bps',
+      name: 'San Jose Commercial Building Energy & Water Benchmarking',
+      billNumber: 'San Jose Ordinance No. 30249',
+      state: 'CA',
+      cities: ['San Jose'],
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — APN-based staggered deadlines',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Administrative citations and civil penalties',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Water benchmarking required alongside energy benchmarking',
+        'Submit to City of San Jose Office of Environmental Services'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Deadline varies by APN (property tax record block). CA AB 802 also applies.'
+    },
+    {
+      id: 'berkeley_beso',
+      name: 'Berkeley Building Energy Saving Ordinance (BESO)',
+      billNumber: 'Berkeley Municipal Code Chapter 19.20',
+      state: 'CA',
+      cities: ['Berkeley'],
+      sfThreshold: 15000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual benchmarking; energy audit every 5 years',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Civil fines per violation',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Energy audit every 5 years (certified auditor required)',
+        'Submit audit report to City of Berkeley Planning Department'
+      ],
+      service: 'Annual Benchmarking + Energy Audit',
+      serviceLink: '#contact',
+      notes: 'BESO covers commercial buildings 15,000+ SF — lower threshold than most comparable programs.'
+    },
+    {
+      id: 'chula_vista_benchmarking',
+      name: 'Chula Vista Commercial Building Energy Benchmarking',
+      billNumber: 'Chula Vista Municipal Code Chapter 15.26',
+      state: 'CA',
+      cities: ['Chula Vista'],
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — calendar year basis',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Administrative penalties per violation',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to City of Chula Vista Environmental Services'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Early Southern California adopter. CA AB 802 statewide requirements also apply.'
+    },
+    {
+      id: 'chicago_benchmarking',
+      name: 'Chicago Energy Benchmarking Ordinance',
+      billNumber: 'Chicago Municipal Code 2-92-920',
+      state: 'IL',
+      cities: ['Chicago'],
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — June 1',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Fines $1,000–$2,500 per violation',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit benchmarking data to City of Chicago',
+        'Public disclosure via Chicago Energy Benchmarking Portal'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Also covers Cook County buildings 50,000+ SF.'
+    },
+    {
+      id: 'evanston_benchmarking',
+      name: 'Evanston Building Energy & Water Use Benchmarking',
+      billNumber: 'Evanston Code Sec. 5-5-1',
+      state: 'IL',
+      cities: ['Evanston'],
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — June 1',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Fines per violation',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to City of Evanston Sustainability Division by June 1'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Covers commercial, institutional, and multifamily buildings 50,000+ SF.'
+    },
+    {
+      id: 'mn_benchmarking',
+      name: 'Minnesota Statewide Building Benchmarking',
+      billNumber: 'MN Statute 216C.40',
+      state: 'MN',
+      cities: null,
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Phased compliance 2025–2026',
+      deadlineUrgent: true,
+      penaltyFormula: () => 'State penalties for non-compliance',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit benchmarking report to MN Commerce Department',
+        'Public disclosure of energy performance'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Statewide MN mandate for buildings 50,000+ SF. Minneapolis city ordinance also applies in Minneapolis.'
+    },
+    {
+      id: 'minneapolis_benchmarking',
+      name: 'Minneapolis Commercial Building Rating & Disclosure',
+      billNumber: 'Minneapolis Code Chapter 248',
+      state: 'MN',
+      cities: ['Minneapolis'],
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — June 1',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Administrative penalties',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to City of Minneapolis Development Services',
+        'Public building energy rating disclosure'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'MN statewide benchmarking also applies. Minneapolis program has longer track record.'
+    },
+    {
+      id: 'atlanta_benchmarking',
+      name: 'Atlanta Commercial Buildings Energy Efficiency Ordinance',
+      billNumber: 'Atlanta Code Sec. 6-6001',
+      state: 'GA',
+      cities: ['Atlanta'],
+      sfThreshold: 25000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Fines per violation',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to City of Atlanta Office of Sustainability',
+        'Energy audits every 10 years (25,000+ SF)'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'One of the most progressive benchmarking programs in the Southeast.'
+    },
+    {
+      id: 'philadelphia_benchmarking',
+      name: 'Philadelphia Energy Benchmarking Ordinance',
+      billNumber: 'Philadelphia Bill No. 120428',
+      state: 'PA',
+      cities: ['Philadelphia'],
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — June 30',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Fines per violation',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to Philadelphia Office of Sustainability by June 30',
+        'Public disclosure of energy and water use'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Covers all commercial and residential buildings 50,000+ SF.'
+    },
+    {
+      id: 'salt_lake_benchmarking',
+      name: 'Salt Lake City Building Energy Performance Policy',
+      billNumber: 'SLC Resolution 19 (2019)',
+      state: 'UT',
+      cities: ['Salt Lake City'],
+      sfThreshold: 25000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Mandatory for buildings 25,000+ SF',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to Salt Lake City Sustainability Division'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Salt Lake City committed to net-zero by 2040. Additional requirements anticipated.'
+    },
+    {
+      id: 'nv_benchmarking',
+      name: 'Nevada Building Energy Benchmarking (Clark County)',
+      billNumber: 'NV SB 448 (2021)',
+      state: 'NV',
+      cities: null,
+      sfThreshold: 30000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — phased 2024–2025',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Administrative penalties',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to Nevada Governor\'s Office of Energy',
+        'Third-party verification for buildings 100,000+ SF'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Focuses on Clark County (Las Vegas metro) initially; expanding statewide. Hotel/casino properties prominently covered.'
+    },
+    {
+      id: 'stlouis_beps',
+      name: 'St. Louis Building Energy Performance Program',
+      billNumber: 'St. Louis Board Bill 209',
+      state: 'MO',
+      cities: ['St. Louis'],
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual benchmarking active; performance targets in development',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'TBD — rulemaking in progress',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to City of St. Louis Sustainability Office'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'BPS performance requirements anticipated as St. Louis climate plan matures. Establish baseline now.'
+    },
+    {
+      id: 'madison_benchmarking',
+      name: 'Madison Commercial Building Energy Benchmarking',
+      billNumber: 'Madison City Ordinance Sec. 33.26',
+      state: 'WI',
+      cities: ['Madison'],
+      sfThreshold: 25000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — phased by building size',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Civil penalties',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to City of Madison Office of Sustainability'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Primary Wisconsin jurisdiction with mandatory benchmarking. WI statewide BPS in early development.'
+    },
+    {
+      id: 'miami_benchmarking',
+      name: 'Miami-Dade Building Energy Benchmarking',
+      billNumber: 'Miami-Dade Green Building Ordinance',
+      state: 'FL',
+      cities: ['Miami', 'Miami Beach', 'Coral Gables', 'Hialeah'],
+      sfThreshold: 30000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — phased implementation',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Civil penalties; fines per violation',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to Miami-Dade Office of Resilience',
+        'Water benchmarking required alongside energy benchmarking'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'No FL statewide BPS mandate. Miami-Dade and City of Miami have active benchmarking programs.'
+    },
+    {
+      id: 'nj_benchmarking',
+      name: 'New Jersey Building Decarbonization & Benchmarking',
+      billNumber: 'NJ P.L. 2021, c. 169',
+      state: 'NJ',
+      cities: null,
+      sfThreshold: 25000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Phased — 2024 and beyond; state BPS rulemaking pending',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Civil penalties; NJ BPU enforcement',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to NJ Board of Public Utilities (BPU)',
+        'Comply with NJ Clean Energy Program requirements'
+      ],
+      service: 'Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'NJ advancing BPS aligned with Executive Order 100 (100% clean energy by 2050).'
+    },
+    {
+      id: 'ct_benchmarking',
+      name: 'Connecticut Building Energy Benchmarking',
+      billNumber: 'CT PA 21-197',
+      state: 'CT',
+      cities: null,
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — June 1; phased 2024–2026',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Civil penalties',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to CT DEEP via benchmarking portal',
+        'Public disclosure of energy performance data'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'CT has aggressive clean energy standards. Building performance standards anticipated as next step.'
+    },
+    {
+      id: 'hi_benchmarking',
+      name: 'Hawaii / Honolulu Building Benchmarking',
+      billNumber: 'Honolulu Ordinance 19-10',
+      state: 'HI',
+      cities: ['Honolulu'],
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Annual — October 1',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'Fines up to $1,000/day',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to Department of Planning and Permitting',
+        'Water usage benchmarking required alongside energy'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Hawaii committed to 100% renewable energy by 2045. Statewide building standards anticipated.'
+    },
+    {
+      id: 'ann_arbor_beps',
+      name: 'Ann Arbor Building Energy Performance Standard',
+      billNumber: 'Ann Arbor A2Zero Carbon Neutrality Plan',
+      state: 'MI',
+      cities: ['Ann Arbor'],
+      sfThreshold: 20000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Phased — performance standards in development for 2025+',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'TBD',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Net-zero carbon pathway documentation'
+      ],
+      service: 'Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'Ann Arbor committed to carbon neutrality by 2030 — one of the most aggressive municipal climate goals in the US.'
+    },
+    {
+      id: 'va_vcea',
+      name: 'Virginia Clean Economy Act — Commercial Building Standards',
+      billNumber: 'VA Clean Economy Act (2020)',
+      state: 'VA',
+      cities: null,
+      sfThreshold: 35000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Rulemaking 2025–2026; compliance 2030+',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'TBD — rulemaking in progress',
+      requirements: [
+        'Monitor State Corporation Commission guidance for building standards',
+        'Prepare baseline GHG emissions inventory',
+        'Align with Dominion Energy and APCo decarbonization pathways'
+      ],
+      service: 'Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'Virginia committed to 100% clean electricity by 2045. Building-specific performance standards in development.'
+    },
+    {
+      id: 'charlotte_beps',
+      name: 'Charlotte Commercial Energy Efficiency Initiative',
+      billNumber: 'Charlotte Community Energy & Environment Strategy',
+      state: 'NC',
+      cities: ['Charlotte'],
+      sfThreshold: 50000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Voluntary — mandatory reporting under development',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'TBD',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to Charlotte Sustainability Office'
+      ],
+      service: 'Annual Benchmarking',
+      serviceLink: '#contact',
+      notes: 'Charlotte and Raleigh exploring formal benchmarking mandates. Early participation positions buildings favorably.'
+    },
+    {
+      id: 'phoenix_benchmarking',
+      name: 'Phoenix Commercial Building Benchmarking',
+      billNumber: 'Phoenix Sustainability Framework',
+      state: 'AZ',
+      cities: ['Phoenix'],
+      sfThreshold: 20000,
+      sfCondition: 'gte',
+      buildingTypes: null,
+      deadlineText: 'Mandatory for large buildings; expanding coverage',
+      deadlineUrgent: false,
+      penaltyFormula: () => 'TBD',
+      requirements: [
+        'Annual ENERGY STAR Portfolio Manager benchmarking',
+        'Submit to City of Phoenix Sustainability Office',
+        'Participate in Phoenix Climate Action Plan reporting'
+      ],
+      service: 'Compliance Assessment',
+      serviceLink: '#contact',
+      notes: 'Phoenix transitioned from voluntary to mandatory benchmarking. Performance standards under consideration.'
     }
   ];
 
