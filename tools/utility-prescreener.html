@@ -989,10 +989,38 @@
         </div>
       </div>
 
-      <a href="../website/index.html#contact" class="cta-btn">
-        &#128197; Schedule a Free 15-Minute Consultation
-      </a>
-      <div class="cta-email">
+      <form
+        id="prescreener-lead-form"
+        action="https://formspree.io/f/meelnyop"
+        method="POST"
+        style="margin-top:1.5rem;"
+        onsubmit="populatePrescreenerHiddenFields()"
+      >
+        <input type="hidden" name="source" value="utility-prescreener" />
+        <input type="hidden" name="_subject" value="New Prescreener Lead — Green Check Solutions" />
+        <input type="hidden" id="ps-savings" name="estimated_savings" value="" />
+        <input type="hidden" id="ps-spend" name="annual_spend" value="" />
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;max-width:460px;margin:0 auto;">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your name"
+            required
+            style="flex:1;min-width:140px;padding:.65rem .9rem;border-radius:6px;border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;font-size:.95rem;"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your email"
+            required
+            style="flex:1;min-width:180px;padding:.65rem .9rem;border-radius:6px;border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;font-size:.95rem;"
+          />
+        </div>
+        <button type="submit" class="cta-btn" style="margin-top:.85rem;">
+          Get My Free Consultation
+        </button>
+      </form>
+      <div class="cta-email" style="margin-top:.75rem;">
         Or email us directly: <a href="mailto:info@greenchecksolutions.com">info@greenchecksolutions.com</a>
       </div>
     </div>
@@ -1486,6 +1514,9 @@
     // Overall savings estimate
     const savingsLow  = annualSpend * 0.05;
     const savingsHigh = annualSpend * 0.15;
+    window._psAnnualSpend = annualSpend;
+    window._psSavingsLow  = savingsLow;
+    window._psSavingsHigh = savingsHigh;
 
     // If no findings at all, add a baseline note
     if (findings.length === 0) {
@@ -1541,6 +1572,16 @@
   }
 
   // ── RESET ───────────────────────────────────────────
+  window.populatePrescreenerHiddenFields = function () {
+    const fmt = (n) => n ? `$${Math.round(n).toLocaleString()}` : '';
+    document.getElementById('ps-spend').value =
+      window._psAnnualSpend ? fmt(window._psAnnualSpend) + '/yr' : '';
+    document.getElementById('ps-savings').value =
+      (window._psSavingsLow && window._psSavingsHigh)
+        ? `${fmt(window._psSavingsLow)} – ${fmt(window._psSavingsHigh)}/yr`
+        : '';
+  };
+
   window.resetForm = function () {
     document.getElementById('state').value       = '';
     document.getElementById('entity-type').value = '';
